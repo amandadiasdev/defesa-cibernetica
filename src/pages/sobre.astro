@@ -15,14 +15,13 @@ import { url } from '../lib/url';
       <div class="about__text">
         <SectionHeading level="h1" eyebrow="Sobre" title={professor.nome} lead={professor.cargo + '.'} />
         <p class="prose">
-          Docente do {professor.posGraduacao[0].nome} ({professor.posGraduacao[0].sigla}, {professor.posGraduacao[0].instituicao})
-          e do {professor.posGraduacao[1].nome} ({professor.posGraduacao[1].sigla}, {professor.posGraduacao[1].instituicao}).
+          {professor.coordenacao.valor} e docente do {professor.posGraduacao[1].nome} ({professor.posGraduacao[1].sigla}, {professor.posGraduacao[1].instituicao}).
           Lotado no {professor.campus.valor} da Unipampa, {professor.classe.valor.toLowerCase()}.
         </p>
         <div class="cluster">
           {professor.areas.map((a) => <Tag>{a.nome}</Tag>)}
         </div>
-        <SourceNote sources={[sources.sobre, sources.docente]} />
+        <SourceNote sources={[sources.sobre, sources.docente, sources.grupo]} />
       </div>
       <figure class="about__photo">
         <img src={url('/foto-silvio.jpeg')} width="280" height="280" alt={`Foto oficial de ${professor.nome}`} loading="eager" />
@@ -55,11 +54,12 @@ import { url } from '../lib/url';
         <SectionHeading id="atuacao" title="Atuação" />
         <ul class="list">
           <li><strong>Graduação:</strong> disciplinas de {professor.disciplinas.map((d) => d.nome).join(', ')} (detalhes na página <a href={url('/ensino/')}>Ensino</a>).</li>
+          <li><strong>Coordenação:</strong> {professor.coordenacao.valor}.</li>
           <li><strong>Pós-graduação:</strong> orientação de mestrado e doutorado no PPGES (Unipampa) e no PPGCO (UFU).</li>
-          <li><strong>Pesquisa:</strong> coordenação do projeto XAIID (2023.PE.AL.2578), descrito na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
+          <li><strong>Pesquisa:</strong> projeto XAIID (2023.PE.AL.2578), descrito na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
           <li><strong>Parcerias:</strong> {professor.parcerias.valor.join(', ')}.</li>
         </ul>
-        <SourceNote sources={[sources.sobre, sources.trabalhe]} />
+        <SourceNote sources={[sources.sobre, sources.trabalhe, sources.grupo]} />
       </div>
       <div>
         <SectionHeading id="metricas" title="Em números" />

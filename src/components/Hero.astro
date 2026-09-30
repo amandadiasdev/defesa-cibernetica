@@ -10,12 +10,17 @@ const t = useTranslations('pt-BR');
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__inner">
     <div class="hero__text">
-      <span class="hero__kicker">Professor · Unipampa e UFU</span>
+      <ul class="hero__badges" aria-label="Titulação">
+        <li class="hero__kicker">Doutor em Ciência da Computação · UFF</li>
+        <li class="hero__kicker">Mestre em Ciência da Computação · UFSM</li>
+        <li class="hero__kicker">Professor · Unipampa</li>
+      </ul>
       <h1 id="hero-title">{professor.nome}</h1>
       <p class="hero__tagline">{t('site.tagline')}</p>
       <p class="hero__lead">
-        Coordenador do projeto {projeto.sigla} ({projeto.codigo}). Doutor em Ciência da Computação (UFF, 2022).
-        Pesquisa sistemas de detecção de intrusão, subestações digitais e o padrão IEC 61850.
+        Doutor em Ciência da Computação (UFF, 2022) e mestre em Ciência da Computação (UFSM, 2018).
+        {professor.coordenacao.curto} e docente do PPGCO (UFU). Pesquisa detecção de intrusão, subestações digitais
+        e o padrão IEC 61850 no projeto {projeto.sigla}.
       </p>
       <div class="hero__actions">
         <Button href="/pesquisa/" variant="primary" onDark>{t('cta.research')}</Button>
@@ -48,6 +53,14 @@ const t = useTranslations('pt-BR');
     align-items: center;
     gap: var(--space-7);
   }
+  .hero__badges {
+    list-style: none;
+    margin: 0 0 var(--space-3);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
   .hero__kicker {
     display: inline-block;
     padding: 4px 12px;
@@ -56,7 +69,6 @@ const t = useTranslations('pt-BR');
     color: #111111;
     font-weight: 600;
     font-size: 13px;
-    margin-bottom: var(--space-3);
   }
   .hero h1 {
     color: inherit;
@@ -112,6 +124,9 @@ const t = useTranslations('pt-BR');
     .hero__actions {
       flex-direction: column;
       align-items: stretch;
+    }
+    .hero__badges {
+      justify-content: center;
     }
   }
 </style>

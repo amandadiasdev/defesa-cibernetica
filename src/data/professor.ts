@@ -17,6 +17,7 @@ export const sources = {
   docente: { id: 2, label: 'Cadastro de docente da Unipampa', url: 'https://unipampa.edu.br/alegrete/docente/19095/dados-gerais' },
   trabalhe: { id: 3, label: 'Página "Trabalhe comigo"', url: 'https://sites.unipampa.edu.br/silvioquincozes/trabalhe-comigo/' },
   scholar: { id: 4, label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=1eDPdn8AAAAJ&hl=pt-BR' },
+  grupo: { id: 5, label: 'Informação do grupo de pesquisa (30/09/2026); página do PPGES', url: 'https://cursos.unipampa.edu.br/cursos/ppges/professores/' },
 } as const;
 
 export const dataConferida = '29/09/2026';
@@ -25,6 +26,7 @@ export const professor = {
   nome: 'Silvio Ereno Quincozes',
   nomeCurto: 'Silvio Quincozes',
   cargo: 'Professor na Universidade Federal do Pampa (Unipampa) e na Universidade Federal de Uberlândia (UFU)',
+  coordenacao: { valor: 'Coordenador do Programa de Pós-Graduação em Engenharia de Software (PPGES) da Unipampa', curto: 'Coordenador do PPGES (Unipampa)', fonte: sources.grupo },
   posGraduacao: [
     { sigla: 'PPGES', nome: 'Programa de Pós-Graduação em Engenharia de Software', instituicao: 'Unipampa', fonte: sources.sobre },
     { sigla: 'PPGCO', nome: 'Programa de Pós-Graduação em Ciência da Computação', instituicao: 'UFU', fonte: sources.sobre },
