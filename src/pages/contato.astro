@@ -4,6 +4,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
 import SourceNote from '../components/SourceNote.astro';
+import EmailCopy from '../components/EmailCopy.astro';
 import { professor, sources } from '../data/professor';
 ---
 
@@ -12,8 +13,8 @@ import { professor, sources } from '../data/professor';
     <div class="container">
       <SectionHeading level="h1" eyebrow="Contato" title="Como falar com o professor" lead="E-mail para assuntos acadêmicos; agenda para marcar reunião; sala para atendimento presencial." />
       <div class="grid grid--3">
-        <Card title="E-mail" href={`mailto:${professor.email.valor}`} linkLabel="Escrever">
-          <p>{professor.email.valor}</p>
+        <Card title="E-mail">
+          <EmailCopy email={professor.email.valor} />
           <p class="caption">Use o e-mail institucional para orientação, disciplinas e propostas de pesquisa.</p>
         </Card>
         <Card title="Agenda" href={professor.agenda.valor} linkLabel="Marcar horário">
