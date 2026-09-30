@@ -1,0 +1,189 @@
+/*
+ * Tokens do brandkit "E4 · Alto contraste" (Figma: BrandKit · Site Silvio).
+ * Cada variável aqui corresponde a uma variável da coleção do Figma, com o
+ * mesmo nome (color/bg/page -> --color-bg-page). Modo claro é o padrão; o
+ * modo escuro entra por preferência do sistema ou pelo atributo data-theme.
+ */
+
+:root {
+  /* Fundos */
+  --color-bg-page: #ffffff;
+  --color-bg-card: #f4f4f0;
+  --color-bg-dark: #111111;
+  --color-bg-hero: #111111;
+
+  /* Texto */
+  --color-text-primary: #111111;
+  --color-text-secondary: #444444;
+  --color-text-on-dark: #ffffff;
+
+  /* Links e destaque */
+  --color-link: #3a0ca3;
+  --color-link-hover: #111111;
+  --color-accent: #3a0ca3;         /* anel de foco no modo claro */
+  --color-accent-on-dark: #8ce99a; /* verde claro sobre fundos escuros */
+
+  /* Bordas */
+  --color-border-card: #111111;
+  --color-border-input: #111111;
+  --color-border-soft: #d9d9d3;
+
+  /* Tag */
+  --color-tag-bg: #8ce99a;
+  --color-tag-text: #111111;
+
+  /* Botões */
+  --color-button-primary-bg: #111111;
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-hover: #3a0ca3;
+  --color-button-secondary-text: #111111;
+  --color-button-secondary-hover-bg: #e3f9e6;
+  --color-button-disabled-bg: #e5e5e0;
+  --color-button-disabled-text: #8a8a85;
+  --color-button-muted: #a3a3a0;
+
+  /* Citação (sem borda lateral) */
+  --color-quote-bg: #f4f4f0;
+  --color-quote-text: #444444;
+
+  /* Navegação */
+  --color-nav-bg: #ffffff;
+  --color-nav-text: #111111;
+  --color-nav-active: #3a0ca3;
+  --color-nav-line: #8ce99a;
+
+  /* Rodapé */
+  --color-footer-bg: #111111;
+  --color-footer-text: #ffffff;
+  --color-footer-link: #8ce99a;
+
+  /* Estados (coleção "Estados (comum)") */
+  --color-success-text: #1b7a3a;
+  --color-success-bg: #e6f4ea;
+  --color-warning-text: #8a5a00;
+  --color-warning-bg: #fff4e0;
+  --color-error-text: #b3261e;
+  --color-error-bg: #fdecea;
+
+  /* Raios */
+  --radius-default: 12px; /* cartões, caixas */
+  --radius-small: 999px;  /* tags, selos */
+  --radius-button: 999px; /* botões em pílula */
+
+  /* Espaçamento (base 8 px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  /* Tipografia */
+  --font-heading: 'Gabarito', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Familjen Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --text-h1: 40px;
+  --text-h2: 32px;
+  --text-h3: 24px;
+  --text-body: 18px;
+  --text-caption: 14px;
+  --leading-h1: 1.2;
+  --leading-h2: 1.25;
+  --leading-h3: 1.3;
+  --leading-body: 1.6;
+  --leading-caption: 1.4;
+
+  /* Layout */
+  --measure: 720px;      /* largura máxima de texto corrido */
+  --container: 1104px;   /* 1440 - 2 x 168 */
+  --gutter: 16px;
+
+  color-scheme: light;
+}
+
+/* Modo escuro: coleção "E4 · Alto contraste escuro" */
+:root:not([data-theme='light']) {
+  @media (prefers-color-scheme: dark) {
+    --color-bg-page: #111111;
+    --color-bg-card: #1c1c1c;
+    --color-bg-dark: #000000;
+    --color-bg-hero: #111111;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #c7c7c2;
+    --color-text-on-dark: #ffffff;
+    --color-link: #8ce99a;
+    --color-link-hover: #ffffff;
+    --color-accent: #4cc9f0;
+    --color-accent-on-dark: #8ce99a;
+    --color-border-card: #333333;
+    --color-border-input: #c7c7c2;
+    --color-border-soft: #2a2a2a;
+    --color-tag-bg: #8ce99a;
+    --color-tag-text: #111111;
+    --color-button-primary-bg: #8ce99a;
+    --color-button-primary-text: #111111;
+    --color-button-primary-hover: #a8f0b4;
+    --color-button-secondary-text: #ffffff;
+    --color-button-secondary-hover-bg: #1c1c1c;
+    --color-button-disabled-bg: #262626;
+    --color-button-disabled-text: #8a8a85;
+    --color-button-muted: #6b6b66;
+    --color-quote-bg: #3a0ca3;
+    --color-quote-text: #ffffff;
+    --color-nav-bg: #000000;
+    --color-nav-text: #ffffff;
+    --color-nav-active: #8ce99a;
+    --color-nav-line: #8ce99a;
+    --color-footer-bg: #000000;
+    --color-footer-text: #c7c7c2;
+    --color-footer-link: #8ce99a;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-bg-page: #111111;
+  --color-bg-card: #1c1c1c;
+  --color-bg-dark: #000000;
+  --color-bg-hero: #111111;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c7c7c2;
+  --color-text-on-dark: #ffffff;
+  --color-link: #8ce99a;
+  --color-link-hover: #ffffff;
+  --color-accent: #4cc9f0;
+  --color-accent-on-dark: #8ce99a;
+  --color-border-card: #333333;
+  --color-border-input: #c7c7c2;
+  --color-border-soft: #2a2a2a;
+  --color-tag-bg: #8ce99a;
+  --color-tag-text: #111111;
+  --color-button-primary-bg: #8ce99a;
+  --color-button-primary-text: #111111;
+  --color-button-primary-hover: #a8f0b4;
+  --color-button-secondary-text: #ffffff;
+  --color-button-secondary-hover-bg: #1c1c1c;
+  --color-button-disabled-bg: #262626;
+  --color-button-disabled-text: #8a8a85;
+  --color-button-muted: #6b6b66;
+  --color-quote-bg: #3a0ca3;
+  --color-quote-text: #ffffff;
+  --color-nav-bg: #000000;
+  --color-nav-text: #ffffff;
+  --color-nav-active: #8ce99a;
+  --color-nav-line: #8ce99a;
+  --color-footer-bg: #000000;
+  --color-footer-text: #c7c7c2;
+  --color-footer-link: #8ce99a;
+  color-scheme: dark;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --text-h1: 32px;
+    --text-h2: 26px;
+    --text-h3: 22px;
+    --text-body: 17px;
+  }
+}

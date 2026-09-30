@@ -1,0 +1,195 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import Tag from '../components/Tag.astro';
+import Button from '../components/Button.astro';
+import Quote from '../components/Quote.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { useTranslations } from '../i18n/ui';
+import { professor, projeto, sources } from '../data/professor';
+import { url } from '../lib/url';
+
+const t = useTranslations('pt-BR');
+const trilha = (await getCollection('trilha')).sort((a, b) => a.data.ordem - b.data.ordem);
+const bolsistas = (await getCollection('bolsistas')).filter((b) => b.data.status === 'atual');
+
+const portas = [
+  {
+    tag: t('label.new'),
+    title: 'Bolsista novo',
+    href: '/bolsistas/#trilha',
+    linkLabel: t('cta.startTrail'),
+    text: 'Trilha de estudo em cinco degraus: do sistema ciberfísico até o tema de cada bolsista, com glossário.',
+  },
+  {
+    tag: t('label.current'),
+    title: 'Bolsista atual',
+    href: '/sistemas/',
+    linkLabel: t('cta.openSystems'),
+    text: 'Codefólio, repositórios de cada bolsista, datasets e ferramentas em um só lugar.',
+  },
+  {
+    tag: t('label.external'),
+    title: 'Visitante',
+    href: '/sobre/',
+    linkLabel: t('cta.about'),
+    text: 'Formação, disciplinas, publicações e como entrar em contato com o professor.',
+  },
+];
+---
+
+<Base
+  title="Início"
+  description="Site do professor Silvio Ereno Quincozes (Unipampa): pesquisa em detecção de intrusão explicável para sistemas ciberfísicos e porta de entrada dos bolsistas do projeto XAIID."
+  isHome
+>
+  <Hero />
+
+  <section class="section" aria-labelledby="portas">
+    <div class="container">
+      <SectionHeading id="portas" title="Por onde começar" lead="Três públicos, três portas. Escolha a sua." />
+      <div class="grid grid--3">
+        {portas.map((p) => (
+          <Card title={p.title} href={p.href} tag={p.tag} linkLabel={p.linkLabel}>
+            <p>{p.text}</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="pesquisa">
+    <div class="container research">
+      <div class="research__text">
+        <SectionHeading id="pesquisa" eyebrow={`Projeto ${projeto.sigla} · ${projeto.codigo}`} title="O que o grupo pesquisa" />
+        <p class="prose">{projeto.resumo}</p>
+        <div class="cluster" aria-label="Temas">
+          {projeto.contexto.map((c) => <Tag>{c}</Tag>)}
+          {projeto.linhas.slice(0, 3).map((l) => <Tag>{l.nome.replace(/\s*\(.*\)/, '')}</Tag>)}
+        </div>
+        <div class="research__actions">
+          <Button href="/pesquisa/" variant="primary">{t('cta.research')}</Button>
+          <Button href={sources.scholar.url} variant="link">{t('cta.scholar')}</Button>
+        </div>
+      </div>
+      <Quote cite="Quincozes et al., 2023 · Google Scholar" href={sources.scholar.url}>
+        O ERENO gera conjuntos de dados realistas de detecção de intrusão para redes IEC 61850 em subestações digitais, com cenários normais e de ataque.
+      </Quote>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="trilha">
+    <div class="container">
+      <SectionHeading
+        id="trilha"
+        eyebrow="Para quem está chegando"
+        title="A trilha em cinco degraus"
+        lead="Cada degrau responde uma pergunta que o degrau seguinte precisa. Leia de cima para baixo; quem já está no grupo pula direto para o quinto."
+      />
+      <ol class="steps">
+        {trilha.map((d) => (
+          <li class="steps__item">
+            <a class="steps__link" href={url(`/trilha/${d.id}/`)}>
+              <span class="steps__num" aria-hidden="true">{d.data.ordem}</span>
+              <span class="steps__body">
+                <span class="steps__title">{d.data.titulo}</span>
+                <span class="steps__q">{d.data.pergunta}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-labelledby="grupo">
+    <div class="container">
+      <SectionHeading id="grupo" title="Quem está no grupo" lead="Bolsistas atuais e seus temas. A lista completa, com egressos, está na página Bolsistas." />
+      <div class="grid grid--3">
+        {bolsistas.map((b) => (
+          <Card title={b.data.nome} href={`/bolsistas/${b.id}/`} tag={b.data.nivel} linkLabel="Ver tema">
+            <p>{b.data.tema}</p>
+          </Card>
+        ))}
+        <Card title="Quer entrar no grupo?" href="/bolsistas/#trabalhe" tag="Vagas" linkLabel="Como funciona">
+          <p>{professor.trabalheComigo.interesses}</p>
+        </Card>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .research {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
+  .research__text .cluster {
+    margin: var(--space-3) 0 var(--space-4);
+  }
+  .research__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+  }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .steps__link {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: var(--space-3);
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-default);
+    background: var(--color-bg-card);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+  .steps__link:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    color: var(--color-text-primary);
+  }
+  .steps__num {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-tag-bg);
+    color: var(--color-tag-text);
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: var(--text-h3);
+  }
+  .steps__body {
+    display: grid;
+    gap: 2px;
+  }
+  .steps__title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: calc(var(--text-body) + 2px);
+  }
+  .steps__q {
+    color: var(--color-text-secondary);
+    font-size: calc(var(--text-body) - 2px);
+  }
+  @media (max-width: 899px) {
+    .research {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

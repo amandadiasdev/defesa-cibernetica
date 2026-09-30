@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base title="Página não encontrada" description="A página que você procurou não existe neste site.">
+  <section class="section">
+    <div class="container">
+      <SectionHeading level="h1" eyebrow="Erro 404" title="Essa página não existe" lead="O endereço pode ter mudado ou ter sido digitado errado." />
+      <div class="cluster">
+        <Button href="/" variant="primary">Voltar ao início</Button>
+        <Button href="/bolsistas/" variant="secondary">Área dos bolsistas</Button>
+      </div>
+    </div>
+  </section>
+</Base>

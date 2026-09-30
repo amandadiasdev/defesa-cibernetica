@@ -1,0 +1,188 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import SourceNote from '../components/SourceNote.astro';
+import Placeholder from '../components/Placeholder.astro';
+import Tag from '../components/Tag.astro';
+import Button from '../components/Button.astro';
+import { professor, sources } from '../data/professor';
+import { url } from '../lib/url';
+---
+
+<Base title="Sobre" description="Formação, atuação e áreas de pesquisa do professor Silvio Ereno Quincozes, da Universidade Federal do Pampa, campus Alegrete.">
+  <section class="section">
+    <div class="container about">
+      <div class="about__text">
+        <SectionHeading level="h1" eyebrow="Sobre" title={professor.nome} lead={professor.cargo + '.'} />
+        <p class="prose">
+          Docente do {professor.posGraduacao[0].nome} ({professor.posGraduacao[0].sigla}, {professor.posGraduacao[0].instituicao})
+          e do {professor.posGraduacao[1].nome} ({professor.posGraduacao[1].sigla}, {professor.posGraduacao[1].instituicao}).
+          Lotado no {professor.campus.valor} da Unipampa, {professor.classe.valor.toLowerCase()}.
+        </p>
+        <div class="cluster">
+          {professor.areas.map((a) => <Tag>{a.nome}</Tag>)}
+        </div>
+        <SourceNote sources={[sources.sobre, sources.docente]} />
+      </div>
+      <figure class="about__photo">
+        <img src={url('/foto-silvio.jpeg')} width="280" height="280" alt={`Foto oficial de ${professor.nome}`} loading="eager" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="formacao">
+    <div class="container">
+      <SectionHeading id="formacao" title="Formação" />
+      <ol class="timeline">
+        {professor.formacao.map((f) => (
+          <li class="timeline__item">
+            <span class="timeline__year"><Placeholder value={f.ano} /></span>
+            <div>
+              <h3 class="timeline__title">{f.titulo}</h3>
+              <p class="timeline__inst">{f.instituicao}</p>
+              <p class="caption">{f.detalhe}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <SourceNote sources={[sources.sobre]} note="O ano da graduação não consta na fonte e está marcado para confirmação." />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="atuacao">
+    <div class="container two-col">
+      <div>
+        <SectionHeading id="atuacao" title="Atuação" />
+        <ul class="list">
+          <li><strong>Graduação:</strong> disciplinas de {professor.disciplinas.map((d) => d.nome).join(', ')} (detalhes na página <a href={url('/ensino/')}>Ensino</a>).</li>
+          <li><strong>Pós-graduação:</strong> orientação de mestrado e doutorado no PPGES (Unipampa) e no PPGCO (UFU).</li>
+          <li><strong>Pesquisa:</strong> coordenação do projeto XAIID (2023.PE.AL.2578), descrito na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
+          <li><strong>Parcerias:</strong> {professor.parcerias.valor.join(', ')}.</li>
+        </ul>
+        <SourceNote sources={[sources.sobre, sources.trabalhe]} />
+      </div>
+      <div>
+        <SectionHeading id="metricas" title="Em números" />
+        <dl class="stats">
+          <div class="stats__item">
+            <dt>Citações</dt>
+            <dd>{professor.metricasScholar.citacoes}</dd>
+          </div>
+          <div class="stats__item">
+            <dt>Índice h</dt>
+            <dd>{professor.metricasScholar.indiceH}</dd>
+          </div>
+        </dl>
+        <p class="caption">Google Scholar em {professor.metricasScholar.data}. {professor.metricasScholar.aviso}</p>
+        <div class="cluster" style="margin-top: var(--space-3)">
+          {professor.perfis.map((p) => (
+            <Button href={p.url} variant="secondary">{p.nome}</Button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-6);
+    align-items: start;
+  }
+  .about__text .cluster {
+    margin-top: var(--space-3);
+  }
+  .about__photo {
+    margin: 0;
+  }
+  .about__photo img {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-accent-on-dark);
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--measure);
+  }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-page);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-default);
+  }
+  .timeline__year {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: var(--text-h3);
+  }
+  .timeline__title {
+    font-size: calc(var(--text-body) + 2px);
+    margin-bottom: 2px;
+  }
+  .timeline__inst {
+    margin-bottom: 2px;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-6);
+  }
+  .list {
+    padding-left: 1.2em;
+    max-width: var(--measure);
+  }
+  .list li + li {
+    margin-top: var(--space-2);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-2);
+  }
+  .stats__item {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-default);
+    background: var(--color-bg-card);
+  }
+  .stats__item dt {
+    font-size: var(--text-caption);
+    color: var(--color-text-secondary);
+  }
+  .stats__item dd {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: var(--text-h1);
+    line-height: 1.1;
+  }
+  @media (max-width: 767px) {
+    .about,
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+    .about__photo {
+      order: -1;
+    }
+    .about__photo img {
+      width: 160px;
+      height: 160px;
+    }
+    .timeline__item {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

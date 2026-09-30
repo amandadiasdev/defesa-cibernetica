@@ -1,0 +1,14 @@
+---
+/**
+ * Marca visível para dados ainda não confirmados. Some do site quando o valor
+ * real for colocado em src/data. Assim ninguém publica sem perceber.
+ */
+interface Props {
+  value: string;
+  label?: string;
+}
+const { value, label = 'a confirmar' } = Astro.props;
+const isPlaceholder = /^\{\{.*\}\}$/.test(value);
+---
+
+{isPlaceholder ? <span class="placeholder" title={value}>{label}</span> : <Fragment>{value}</Fragment>}

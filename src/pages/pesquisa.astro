@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import Tag from '../components/Tag.astro';
+import Button from '../components/Button.astro';
+import SourceNote from '../components/SourceNote.astro';
+import { professor, projeto, sources } from '../data/professor';
+import { publicacoesDestaque, dataConferida } from '../data/publicacoes';
+import { url } from '../lib/url';
+
+const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XAI|explainable/i.test(p.titulo)).slice(0, 3);
+---
+
+<Base title="Pesquisa" description="O projeto XAIID: detecção de intrusão em sistemas ciberfísicos com aprendizado de máquina, inteligência artificial explicável, otimização de hiperparâmetros e seleção de características.">
+  <section class="section">
+    <div class="container">
+      <SectionHeading level="h1" eyebrow={`Projeto ${projeto.sigla} · ${projeto.codigo}`} title={projeto.titulo} lead={projeto.resumo} />
+      <div class="cluster">
+        {projeto.contexto.map((c) => <Tag>{c}</Tag>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="linhas">
+    <div class="container">
+      <SectionHeading id="linhas" title="Cinco linhas, um objetivo" lead="Cada linha responde uma parte da pergunta: como detectar ataques em sistemas ciberfísicos de forma confiável e explicável?" />
+      <div class="grid grid--3">
+        {projeto.linhas.map((l, i) => (
+          <Card title={l.nome} tag={`Linha ${i + 1}`}>
+            <p>{l.descricao}</p>
+          </Card>
+        ))}
+        <Card title="Como as linhas se ligam" tag="Fluxo">
+          <p>Dados realistas (ERENO) alimentam modelos de detecção; a XAI mostra o que o modelo usa; a explicação orienta a seleção de características e o ajuste de hiperparâmetros; o ciclo recomeça com um modelo mais enxuto e auditável.</p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contexto">
+    <div class="container two-col">
+      <div>
+        <SectionHeading id="contexto" title="Contexto de aplicação" />
+        <p class="prose">
+          O ponto de partida são as redes elétricas inteligentes e as subestações digitais, em que dispositivos eletrônicos inteligentes (IEDs)
+          trocam mensagens pelo padrão IEC 61850. Um ataque bem-sucedido nesse ambiente tem efeito físico, como a abertura indevida de um disjuntor.
+          Por isso o grupo trabalha com dados de tráfego realistas e avalia os detectores por classe de ataque, e não só pela acurácia geral.
+        </p>
+        <p class="prose">
+          Smart grids e IEC 61850 são o contexto inicial, não o limite: os métodos se aplicam a outros sistemas ciberfísicos e à Internet das Coisas industrial.
+        </p>
+        <SourceNote sources={[sources.sobre, sources.scholar]} />
+      </div>
+      <div>
+        <SectionHeading id="parcerias" title="Parcerias" />
+        <ul class="partners">
+          {professor.parcerias.valor.map((p) => <li>{p}</li>)}
+        </ul>
+        <p class="caption">Instituições parceiras citadas na página "Trabalhe comigo".</p>
+        <h3 style="margin-top: var(--space-5)">Áreas declaradas</h3>
+        <ul class="partners">
+          {professor.areas.map((a) => <li>{a.nome}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="destaques">
+    <div class="container">
+      <SectionHeading id="destaques" title="Trabalhos ligados ao projeto" lead={`Três publicações do perfil do professor diretamente relacionadas ao tema. Contagens de citações em ${dataConferida}.`} />
+      <div class="grid grid--3">
+        {destaques.map((p) => (
+          <Card title={p.titulo} tag={String(p.ano)}>
+            <p>{p.destaque}</p>
+            <p class="caption">{p.citacoes} citações · {p.tema.join(' · ')}</p>
+          </Card>
+        ))}
+      </div>
+      <div class="cluster" style="margin-top: var(--space-5)">
+        <Button href="/publicacoes/" variant="primary">Todas as publicações em destaque</Button>
+        <Button href={sources.scholar.url} variant="link">Perfil no Google Scholar</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="participar">
+    <div class="container">
+      <SectionHeading id="participar" title="Quer participar?" lead="Iniciação científica, TCC, mestrado e doutorado. A página dos bolsistas explica a trilha de estudo e o que se espera de quem entra." />
+      <Button href="/bolsistas/" variant="primary">Área dos bolsistas</Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .two-col {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-6);
+  }
+  .partners {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-2);
+    display: grid;
+    gap: var(--space-1);
+  }
+  .partners li {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-default);
+  }
+  @media (max-width: 767px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

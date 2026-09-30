@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import SourceNote from '../components/SourceNote.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { professor, sources, A_CONFIRMAR } from '../data/professor';
+---
+
+<Base title="Ensino" description="Disciplinas lecionadas pelo professor Silvio Quincozes na graduação da Unipampa e programas de pós-graduação em que orienta.">
+  <section class="section">
+    <div class="container">
+      <SectionHeading level="h1" eyebrow="Ensino" title="Disciplinas e orientação" lead="O que o professor leciona na graduação e onde orienta na pós-graduação. Semestres e materiais serão adicionados conforme forem confirmados." />
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="graduacao">
+    <div class="container">
+      <SectionHeading id="graduacao" title="Graduação · Campus Alegrete" />
+      <div class="grid grid--3">
+        {professor.disciplinas.map((d) => (
+          <Card title={d.nome} tag={d.nivel}>
+            <p>Semestre: <Placeholder value={A_CONFIRMAR} label="semestre a confirmar" /></p>
+            <p>Material: <Placeholder value={A_CONFIRMAR} label="link a confirmar" /></p>
+          </Card>
+        ))}
+      </div>
+      <SourceNote sources={[sources.sobre]} note="Nomes das disciplinas conforme a página institucional; semestre e material ainda não informados." />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pos">
+    <div class="container">
+      <SectionHeading id="pos" title="Pós-graduação" lead="Orientação de mestrado e doutorado em dois programas." />
+      <div class="grid grid--2">
+        {professor.posGraduacao.map((p) => (
+          <Card title={`${p.sigla} · ${p.instituicao}`} tag="Mestrado e doutorado">
+            <p>{p.nome}.</p>
+          </Card>
+        ))}
+      </div>
+      <SourceNote sources={[sources.sobre, sources.trabalhe]} />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+import SourceNote from '../components/SourceNote.astro';
+import { professor, sources } from '../data/professor';
+---
+
+<Base title="Contato" description="Como falar com o professor Silvio Quincozes: e-mail institucional, sala no campus Alegrete da Unipampa e agenda para reuniões.">
+  <section class="section">
+    <div class="container">
+      <SectionHeading level="h1" eyebrow="Contato" title="Como falar com o professor" lead="E-mail para assuntos acadêmicos; agenda para marcar reunião; sala para atendimento presencial." />
+      <div class="grid grid--3">
+        <Card title="E-mail" href={`mailto:${professor.email.valor}`} linkLabel="Escrever">
+          <p>{professor.email.valor}</p>
+          <p class="caption">Use o e-mail institucional para orientação, disciplinas e propostas de pesquisa.</p>
+        </Card>
+        <Card title="Agenda" href={professor.agenda.valor} linkLabel="Marcar horário">
+          <p>Agenda pública para reuniões.</p>
+          <p class="caption">Descreva o assunto ao marcar, para a reunião render.</p>
+        </Card>
+        <Card title="Presencial">
+          <p>{professor.sala.valor}</p>
+          <p>Unipampa · {professor.campus.valor}</p>
+          <p class="caption">Horário de atendimento: a confirmar.</p>
+        </Card>
+      </div>
+      <SourceNote sources={[sources.docente, sources.sobre, sources.trabalhe]} />
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="container">
+      <SectionHeading title="Perfis" lead="Publicações, currículo e redes." />
+      <div class="cluster">
+        {professor.perfis.map((p) => (
+          <Button href={p.url} variant="secondary">{p.nome}</Button>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

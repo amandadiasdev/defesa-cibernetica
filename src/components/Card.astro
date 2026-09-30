@@ -1,0 +1,92 @@
+---
+/**
+ * Cartão do brandkit: fundo bg/card, borda 1 px, raio 12 px.
+ * Quando recebe href, o cartão inteiro vira um link (com o título como âncora).
+ */
+import { url } from '../lib/url';
+import Tag from './Tag.astro';
+
+interface Props {
+  title: string;
+  href?: string;
+  tag?: string;
+  linkLabel?: string;
+  as?: 'article' | 'div' | 'li';
+  class?: string;
+}
+
+const { title, href, tag, linkLabel, as: Element = 'article', class: className } = Astro.props;
+const isExternal = href ? /^https?:/.test(href) : false;
+---
+
+<Element class:list={['card', { 'card--link': !!href }, className]}>
+  {tag && <Tag>{tag}</Tag>}
+  <h3 class="card__title">
+    {href ? (
+      <a class="card__anchor" href={url(href)} rel={isExternal ? 'noopener' : undefined}>{title}</a>
+    ) : (
+      title
+    )}
+  </h3>
+  <div class="card__body">
+    <slot />
+  </div>
+  {href && linkLabel && (
+    <span class="card__cta" aria-hidden="true">{linkLabel} →</span>
+  )}
+</Element>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-default);
+    color: var(--color-text-primary);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+  .card--link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  .card--link:focus-within {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .card__title {
+    margin: var(--space-1) 0 0;
+    font-size: var(--text-h3);
+  }
+  .card__anchor {
+    color: inherit;
+    text-decoration: none;
+  }
+  .card__anchor::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .card__anchor:focus-visible {
+    outline: none;
+  }
+  .card__body {
+    color: var(--color-text-secondary);
+    font-size: calc(var(--text-body) - 2px);
+  }
+  .card__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .card__cta {
+    margin-top: auto;
+    padding-top: var(--space-2);
+    font-weight: 600;
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+</style>

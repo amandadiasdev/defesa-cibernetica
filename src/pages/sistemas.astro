@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import Tag from '../components/Tag.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { sistemas } from '../data/sistemas';
+import { url } from '../lib/url';
+
+const bolsistas = (await getCollection('bolsistas')).filter((b) => b.data.repositorio);
+const grupos: Array<{ id: (typeof sistemas)[number]['categoria']; titulo: string; lead: string }> = [
+  { id: 'grupo', titulo: 'Sistemas do grupo', lead: 'Onde o trabalho do grupo é organizado e publicado.' },
+  { id: 'dados', titulo: 'Dados e frameworks', lead: 'Conjuntos de dados e ferramentas usados nos experimentos.' },
+  { id: 'perfil', titulo: 'Perfis acadêmicos', lead: 'Publicações, currículo e identificadores do professor.' },
+  { id: 'ferramenta', titulo: 'Ferramentas do dia a dia', lead: 'Agenda e utilitários.' },
+];
+const isPlaceholder = (v: string) => /^\{\{.*\}\}$/.test(v);
+---
+
+<Base title="Sistemas" description="Codefólio, repositórios dos bolsistas, datasets, perfis acadêmicos e ferramentas do grupo de pesquisa XAIID.">
+  <section class="section">
+    <div class="container">
+      <SectionHeading level="h1" eyebrow="Sistemas" title="Tudo do grupo em um só lugar" lead="Links rápidos para quem já está no grupo. Itens marcados como a confirmar ainda não têm endereço verificado." />
+    </div>
+  </section>
+
+  {grupos.map((g, gi) => {
+    const itens = sistemas.filter((s) => s.categoria === g.id);
+    if (itens.length === 0) return null;
+    return (
+      <section class:list={['section', { 'section--band': gi % 2 === 0 }]} aria-labelledby={`grupo-${g.id}`}>
+        <div class="container">
+          <SectionHeading id={`grupo-${g.id}`} title={g.titulo} lead={g.lead} />
+          <div class="grid grid--3">
+            {itens.map((s) => {
+              const pending = isPlaceholder(s.url);
+              return (
+                <Card title={s.nome} href={pending ? undefined : s.url} tag={pending ? 'a confirmar' : undefined} linkLabel={pending ? undefined : 'Abrir'}>
+                  <p>{isPlaceholder(s.descricao) ? <Placeholder value={s.descricao} label="descrição a confirmar" /> : s.descricao}</p>
+                  {s.acesso && <p class="caption">{s.acesso}</p>}
+                  <p class="cluster">
+                    {s.publico.map((p) => (
+                      <Tag>{p === 'novo' ? 'Bolsista novo' : p === 'atual' ? 'Bolsista atual' : 'Visitante'}</Tag>
+                    ))}
+                  </p>
+                </Card>
+              );
+            })}
+            {g.id === 'grupo' &&
+              bolsistas.map((b) => (
+                <Card title={`Repositório · ${b.data.nome}`} href={b.data.repositorio!.url} tag={b.data.repositorio!.privado ? 'Privado' : 'Público'} linkLabel="Abrir">
+                  <p>{b.data.tema}</p>
+                </Card>
+              ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="section">
+    <div class="container">
+      <p class="caption">
+        Faltou algo? Os links desta página ficam em <code>src/data/sistemas.ts</code> no <a href={url('/bolsistas/')}>repositório do site</a>.
+      </p>
+    </div>
+  </section>
+</Base>

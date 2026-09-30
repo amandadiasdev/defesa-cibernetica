@@ -1,0 +1,117 @@
+---
+/**
+ * Botão em pílula, nas três variantes do brandkit.
+ * Renderiza <a> quando recebe href, senão <button>.
+ */
+import { url } from '../lib/url';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'link';
+  /** Versão para fundos escuros (capa): usa o verde claro. */
+  onDark?: boolean;
+  type?: 'button' | 'submit';
+  external?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'primary', onDark = false, type = 'button', external, class: className } = Astro.props;
+const classes = ['btn', `btn--${variant}`, { 'btn--on-dark': onDark }, className];
+const isExternal = external ?? (href ? /^https?:/.test(href) : false);
+---
+
+{
+  href ? (
+    <a class:list={classes} href={url(href)} rel={isExternal ? 'noopener' : undefined}>
+      <slot />
+    </a>
+  ) : (
+    <button class:list={classes} type={type}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 48px;
+    padding: 12px 24px;
+    border-radius: var(--radius-button);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 120ms ease, color 120ms ease, border-color 120ms ease, transform 120ms ease;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn--primary {
+    background: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+    border-color: var(--color-button-primary-bg);
+  }
+  .btn--primary:hover {
+    background: var(--color-button-primary-hover);
+    border-color: var(--color-button-primary-hover);
+    color: var(--color-button-primary-text);
+  }
+
+  .btn--secondary {
+    background: transparent;
+    color: var(--color-button-secondary-text);
+    border-color: var(--color-button-secondary-text);
+  }
+  .btn--secondary:hover {
+    background: var(--color-button-secondary-hover-bg);
+    color: var(--color-button-secondary-text);
+  }
+
+  .btn--link {
+    background: transparent;
+    padding-inline: 0;
+    min-height: 0;
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .btn--link:hover {
+    color: var(--color-link-hover);
+  }
+
+  /* Sobre a capa preta: verde claro como preenchimento, branco como contorno */
+  .btn--on-dark.btn--primary {
+    background: var(--color-accent-on-dark);
+    border-color: var(--color-accent-on-dark);
+    color: #111111;
+  }
+  .btn--on-dark.btn--primary:hover {
+    background: #a8f0b4;
+    border-color: #a8f0b4;
+    color: #111111;
+  }
+  .btn--on-dark.btn--secondary {
+    color: var(--color-text-on-dark);
+    border-color: var(--color-text-on-dark);
+  }
+  .btn--on-dark.btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-on-dark);
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    background: var(--color-button-disabled-bg);
+    border-color: var(--color-button-disabled-bg);
+    color: var(--color-button-disabled-text);
+    cursor: not-allowed;
+  }
+</style>

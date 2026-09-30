@@ -1,0 +1,30 @@
+---
+/**
+ * Nota de fonte: aparece embaixo de dados sobre o professor para que o leitor
+ * saiba de onde cada informação veio e quando foi conferida.
+ */
+import { dataConferida } from '../data/professor';
+
+interface Props {
+  sources: Array<{ label: string; url: string }>;
+  note?: string;
+}
+const { sources, note } = Astro.props;
+---
+
+<p class="source-note">
+  Fonte: {sources.map((s, i) => (
+    <>
+      <a href={s.url} rel="noopener">{s.label}</a>{i < sources.length - 1 ? '; ' : ''}
+    </>
+  ))}. Conferido em {dataConferida}.{note && <> {note}</>}
+</p>
+
+<style>
+  .source-note {
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-3);
+  }
+</style>

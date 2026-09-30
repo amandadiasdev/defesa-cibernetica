@@ -1,0 +1,114 @@
+---
+import { url } from '../lib/url';
+import { useTranslations } from '../i18n/ui';
+import { professor, projeto, sources, dataConferida } from '../data/professor';
+
+const t = useTranslations('pt-BR');
+const sections = [
+  { href: '/sobre/', label: t('nav.about') },
+  { href: '/pesquisa/', label: t('nav.research') },
+  { href: '/ensino/', label: t('nav.teaching') },
+  { href: '/bolsistas/', label: t('nav.students') },
+  { href: '/sistemas/', label: t('nav.systems') },
+  { href: '/publicacoes/', label: t('nav.publications') },
+  { href: '/contato/', label: t('nav.contact') },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__about">
+      <p class="site-footer__name">{professor.nome}</p>
+      <p>{t('footer.institution')}</p>
+      <p>{professor.sala.valor} · <a href={`mailto:${professor.email.valor}`}>{professor.email.valor}</a></p>
+      <p>{t('footer.project')} · {projeto.sigla}</p>
+    </div>
+
+    <div>
+      <p class="site-footer__heading">{t('footer.profiles')}</p>
+      <ul class="site-footer__list">
+        {professor.perfis.map((p) => (
+          <li><a href={p.url} rel="noopener">{p.nome}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="site-footer__heading">{t('footer.sections')}</p>
+      <ul class="site-footer__list">
+        {sections.map((s) => (
+          <li><a href={url(s.href)}>{s.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__meta">
+    <p>
+      {t('footer.source')}: {Object.values(sources).map((s, i) => (
+        <>
+          <a href={s.url} rel="noopener">{s.label}</a>{i < Object.values(sources).length - 1 ? ' · ' : ''}
+        </>
+      ))}. {t('footer.updated')} {dataConferida}.
+    </p>
+    <p>{t('footer.rights')}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    padding-block: var(--space-6) var(--space-5);
+    margin-top: var(--space-8);
+    font-size: calc(var(--text-body) - 2px);
+  }
+  .site-footer a {
+    color: var(--color-footer-link);
+  }
+  .site-footer a:hover {
+    color: var(--color-text-on-dark);
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-5);
+  }
+  .site-footer__name {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: var(--text-h3);
+    margin-bottom: var(--space-2);
+    color: var(--color-text-on-dark);
+  }
+  .site-footer__heading {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    color: var(--color-text-on-dark);
+    margin-bottom: var(--space-2);
+  }
+  .site-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-footer__list li + li {
+    margin-top: var(--space-1);
+  }
+  .site-footer__meta {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid #333333;
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+  .site-footer__meta p {
+    margin-bottom: var(--space-1);
+  }
+  @media (max-width: 767px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+  }
+</style>
