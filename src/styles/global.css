@@ -40,7 +40,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading);
-  font-weight: 900;
+  font-weight: var(--weight-heading);
   margin: 0 0 var(--space-3);
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -49,6 +49,7 @@ h4 {
 h1 {
   font-size: var(--text-h1);
   line-height: var(--leading-h1);
+  font-weight: var(--weight-display);
 }
 h2 {
   font-size: var(--text-h2);
@@ -257,7 +258,7 @@ hr {
 }
 .markdown th {
   font-family: var(--font-heading);
-  font-weight: 900;
+  font-weight: var(--weight-heading);
 }
 
 @media print {

@@ -57,6 +57,9 @@ const isExternal = href ? /^https?:/.test(href) : false;
     outline: 3px solid var(--color-accent);
     outline-offset: 2px;
   }
+  .card :global(.tag) {
+    align-self: flex-start;
+  }
   .card__title {
     margin: var(--space-1) 0 0;
     font-size: var(--text-h3);

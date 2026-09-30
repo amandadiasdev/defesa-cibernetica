@@ -83,6 +83,8 @@
   /* Tipografia */
   --font-heading: 'Gabarito', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'Familjen Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --weight-heading: 700;  /* títulos e cartões (era 900) */
+  --weight-display: 800;  /* só o nome na capa */
   --text-h1: 40px;
   --text-h2: 32px;
   --text-h3: 24px;
