@@ -4,9 +4,8 @@ import SectionHeading from '../components/SectionHeading.astro';
 import Card from '../components/Card.astro';
 import Tag from '../components/Tag.astro';
 import Button from '../components/Button.astro';
-import SourceNote from '../components/SourceNote.astro';
 import { professor, projeto, sources } from '../data/professor';
-import { publicacoesDestaque, dataConferida } from '../data/publicacoes';
+import { publicacoesDestaque } from '../data/publicacoes';
 import { url } from '../lib/url';
 
 const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XAI|explainable/i.test(p.titulo)).slice(0, 3);
@@ -50,14 +49,12 @@ const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XA
         <p class="prose">
           Smart grids e IEC 61850 são o contexto inicial, não o limite: os métodos se aplicam a outros sistemas ciberfísicos e à Internet das Coisas industrial.
         </p>
-        <SourceNote sources={[sources.sobre, sources.scholar]} />
       </div>
       <div>
         <SectionHeading id="parcerias" title="Parcerias" />
         <ul class="partners">
           {professor.parcerias.valor.map((p) => <li>{p}</li>)}
         </ul>
-        <p class="caption">Instituições parceiras citadas na página "Trabalhe comigo".</p>
         <h3 style="margin-top: var(--space-5)">Áreas declaradas</h3>
         <ul class="partners">
           {professor.areas.map((a) => <li>{a.nome}</li>)}
@@ -68,7 +65,7 @@ const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XA
 
   <section class="section section--band" aria-labelledby="destaques">
     <div class="container">
-      <SectionHeading id="destaques" title="Trabalhos ligados ao projeto" lead={`Três publicações do perfil do professor diretamente relacionadas ao tema. Contagens de citações em ${dataConferida}.`} />
+      <SectionHeading id="destaques" title="Trabalhos ligados ao projeto" lead="Três publicações do professor diretamente relacionadas ao tema." />
       <div class="grid grid--3">
         {destaques.map((p) => (
           <Card title={p.titulo} tag={String(p.ano)}>

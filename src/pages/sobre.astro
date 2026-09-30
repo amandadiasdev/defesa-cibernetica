@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import SourceNote from '../components/SourceNote.astro';
 import Placeholder from '../components/Placeholder.astro';
 import Tag from '../components/Tag.astro';
 import Button from '../components/Button.astro';
@@ -21,7 +20,6 @@ import { url } from '../lib/url';
         <div class="cluster">
           {professor.areas.map((a) => <Tag>{a.nome}</Tag>)}
         </div>
-        <SourceNote sources={[sources.sobre, sources.docente, sources.grupo]} />
       </div>
       <figure class="about__photo">
         <img src={url('/foto-silvio.jpeg')} width="280" height="280" alt={`Foto oficial de ${professor.nome}`} loading="eager" />
@@ -44,7 +42,6 @@ import { url } from '../lib/url';
           </li>
         ))}
       </ol>
-      <SourceNote sources={[sources.sobre]} note="O ano da graduação não consta na fonte e está marcado para confirmação." />
     </div>
   </section>
 
@@ -59,7 +56,6 @@ import { url } from '../lib/url';
           <li><strong>Pesquisa:</strong> projeto XAIID (2023.PE.AL.2578), descrito na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
           <li><strong>Parcerias:</strong> {professor.parcerias.valor.join(', ')}.</li>
         </ul>
-        <SourceNote sources={[sources.sobre, sources.trabalhe, sources.grupo]} />
       </div>
       <div>
         <SectionHeading id="metricas" title="Em números" />
@@ -73,7 +69,7 @@ import { url } from '../lib/url';
             <dd>{professor.metricasScholar.indiceH}</dd>
           </div>
         </dl>
-        <p class="caption">Google Scholar em {professor.metricasScholar.data}. {professor.metricasScholar.aviso}</p>
+        <p class="caption">Google Scholar, {professor.metricasScholar.data}.</p>
         <div class="cluster" style="margin-top: var(--space-3)">
           {professor.perfis.map((p) => (
             <Button href={p.url} variant="secondary">{p.nome}</Button>

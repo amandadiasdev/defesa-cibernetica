@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Card from '../components/Card.astro';
-import SourceNote from '../components/SourceNote.astro';
 import Placeholder from '../components/Placeholder.astro';
 import { professor, sources, A_CONFIRMAR } from '../data/professor';
 ---
@@ -25,7 +24,6 @@ import { professor, sources, A_CONFIRMAR } from '../data/professor';
           </Card>
         ))}
       </div>
-      <SourceNote sources={[sources.sobre]} note="Nomes das disciplinas conforme a página institucional; semestre e material ainda não informados." />
     </div>
   </section>
 
@@ -39,7 +37,6 @@ import { professor, sources, A_CONFIRMAR } from '../data/professor';
           </Card>
         ))}
       </div>
-      <SourceNote sources={[sources.sobre, sources.trabalhe]} />
     </div>
   </section>
 </Base>

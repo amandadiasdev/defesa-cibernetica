@@ -12,7 +12,7 @@ const porAno = [...publicacoesDestaque].sort((a, b) => b.ano - a.ano || b.citaco
 <Base title="Publicações" description="Publicações em destaque do professor Silvio Quincozes, com links para a lista completa no Google Scholar, ORCID e Lattes.">
   <section class="section">
     <div class="container">
-      <SectionHeading level="h1" eyebrow="Publicações" title="Trabalhos em destaque" lead={`Os cinco trabalhos mais citados do perfil do professor, com contagens de ${dataConferida}. A lista completa e sempre atualizada fica nos perfis abaixo.`} />
+      <SectionHeading level="h1" eyebrow="Publicações" title="Trabalhos em destaque" lead={`Os cinco trabalhos mais citados do professor (Google Scholar, ${dataConferida}). A lista completa e sempre atualizada fica nos perfis abaixo.`} />
       <div class="cluster">
         <Button href={sources.scholar.url} variant="primary">Google Scholar</Button>
         <Button href={professor.perfis[1].url} variant="secondary">ORCID</Button>
@@ -32,15 +32,12 @@ const porAno = [...publicacoesDestaque].sort((a, b) => b.ano - a.ano || b.citaco
               {p.destaque && <p class="pub__note">{p.destaque}</p>}
               <div class="cluster">
                 {p.tema.map((t) => <Tag>{t}</Tag>)}
-                <span class="caption">{p.citacoes} citações em {dataConferida}</span>
+                <span class="caption">{p.citacoes} citações</span>
               </div>
             </div>
           </li>
         ))}
       </ol>
-      <p class="caption" style="margin-top: var(--space-4)">
-        Métricas gerais em {professor.metricasScholar.data}: {professor.metricasScholar.citacoes} citações e índice h {professor.metricasScholar.indiceH}. {professor.metricasScholar.aviso}
-      </p>
     </div>
   </section>
 </Base>

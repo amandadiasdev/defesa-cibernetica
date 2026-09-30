@@ -1,7 +1,7 @@
 ---
 import { url } from '../lib/url';
 import { useTranslations } from '../i18n/ui';
-import { professor, projeto, sources, dataConferida } from '../data/professor';
+import { professor, projeto } from '../data/professor';
 
 const t = useTranslations('pt-BR');
 const sections = [
@@ -44,13 +44,6 @@ const sections = [
   </div>
 
   <div class="container site-footer__meta">
-    <p>
-      {t('footer.source')}: {Object.values(sources).map((s, i) => (
-        <>
-          <a href={s.url} rel="noopener">{s.label}</a>{i < Object.values(sources).length - 1 ? ' · ' : ''}
-        </>
-      ))}. {t('footer.updated')} {dataConferida}.
-    </p>
     <p>{t('footer.rights')}</p>
   </div>
 </footer>

@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import Card from '../../components/Card.astro';
 import Button from '../../components/Button.astro';
-import SourceNote from '../../components/SourceNote.astro';
 import { professor, sources } from '../../data/professor';
 import { areas } from '../../data/areas';
 
@@ -51,7 +50,6 @@ const resumo = areas.map((a) => ({
         <Button href={`mailto:${professor.email.valor}`} variant="primary">Escrever para o professor</Button>
         <Button href="/contato/" variant="secondary">Outras formas de contato</Button>
       </div>
-      <SourceNote sources={[sources.trabalhe]} />
     </div>
   </section>
 
