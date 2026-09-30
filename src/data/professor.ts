@@ -47,6 +47,7 @@ export const professor = {
     { nome: 'Banco de Dados', nivel: 'Graduação', fonte: sources.sobre },
     { nome: 'Resolução de Problemas IV (RP IV)', nivel: 'Graduação', fonte: sources.sobre },
     { nome: 'Engenharia de Software Seguro', nivel: 'Graduação', fonte: sources.sobre },
+    { nome: 'Programação Orientada a Objetos em Java', nivel: 'Graduação', fonte: sources.grupo },
   ],
   areas: [
     { nome: 'Sistemas de detecção de intrusão (IDS)', fonte: sources.sobre },
