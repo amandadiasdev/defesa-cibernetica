@@ -8,18 +8,14 @@ import EmailCopy from '../components/EmailCopy.astro';
 import { professor, sources } from '../data/professor';
 ---
 
-<Base title="Contato" description="Como falar com o professor Silvio Quincozes: e-mail institucional, sala no campus Alegrete da Unipampa e agenda para reuniões.">
+<Base title="Contato" description="Como falar com o professor Silvio Quincozes: e-mail institucional e sala no campus Alegrete da Unipampa.">
   <section class="section">
     <div class="container">
-      <SectionHeading level="h1" eyebrow="Contato" title="Como falar com o professor" lead="E-mail para assuntos acadêmicos; agenda para marcar reunião; sala para atendimento presencial." />
-      <div class="grid grid--3">
+      <SectionHeading level="h1" eyebrow="Contato" title="Como falar com o professor" lead="E-mail para assuntos acadêmicos e sala para atendimento presencial. Para marcar uma reunião, escreva por e-mail." />
+      <div class="grid grid--2">
         <Card title="E-mail">
           <EmailCopy email={professor.email.valor} />
           <p class="caption">Use o e-mail institucional para orientação, disciplinas e propostas de pesquisa.</p>
-        </Card>
-        <Card title="Agenda" href={professor.agenda.valor} linkLabel="Marcar horário">
-          <p>Agenda pública para reuniões.</p>
-          <p class="caption">Descreva o assunto ao marcar, para a reunião render.</p>
         </Card>
         <Card title="Presencial">
           <p>{professor.sala.valor}</p>

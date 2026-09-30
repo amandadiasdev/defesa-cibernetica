@@ -58,11 +58,4 @@ export const sistemas: Sistema[] = [
     categoria: 'perfil',
     publico: ['externo'],
   },
-  {
-    nome: 'Agenda para reuniões',
-    descricao: 'Marque um horário com o professor pela agenda pública.',
-    url: 'https://calendar.app.google/k996aUwgi9tfUbgj7',
-    categoria: 'ferramenta',
-    publico: ['atual', 'externo'],
-  },
 ];

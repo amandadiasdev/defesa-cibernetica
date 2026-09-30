@@ -35,7 +35,6 @@ export const professor = {
   classe: { valor: 'Classe A · Adjunto A · Nível 1', fonte: sources.docente },
   sala: { valor: 'Sala 1A-332', fonte: sources.sobre },
   email: { valor: 'silvioquincozes@unipampa.edu.br', fonte: sources.docente },
-  agenda: { valor: 'https://calendar.app.google/k996aUwgi9tfUbgj7', fonte: sources.trabalhe },
   formacao: [
     { titulo: 'Doutorado em Ciência da Computação', instituicao: 'Universidade Federal Fluminense (UFF)', ano: '2022', detalhe: 'Concluído em fevereiro de 2022', fonte: sources.sobre },
     { titulo: 'Doutorado sanduíche', instituicao: 'University of Pittsburgh (PITT), Estados Unidos', ano: '2020', detalhe: 'Período encerrado em dezembro de 2020', fonte: sources.sobre },
