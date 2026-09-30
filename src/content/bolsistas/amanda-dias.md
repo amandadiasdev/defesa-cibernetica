@@ -3,7 +3,7 @@ nome: Amanda Dias
 nivel: Iniciação científica
 area: pesquisa
 status: atual
-tema: Explicabilidade (XAI) e agentes de IA aplicados a sistemas de detecção de intrusão em sistemas ciberfísicos
+tema: "Explicabilidade (XAI) e agentes de IA aplicados a sistemas de detecção de intrusão em sistemas ciberfísicos"
 pergunta: Como métodos de XAI e agentes de IA podem tornar um IDS para redes IEC 61850 mais interpretável e mais fácil de auditar?
 inicio: "2026"
 repositorio:

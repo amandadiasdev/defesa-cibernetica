@@ -1,7 +1,7 @@
 ---
 import { url } from '../lib/url';
 import { useTranslations } from '../i18n/ui';
-import { professor, projeto } from '../data/professor';
+import { professor } from '../data/professor';
 
 const t = useTranslations('pt-BR');
 const sections = [
@@ -21,7 +21,6 @@ const sections = [
       <p class="site-footer__name">{professor.nome}</p>
       <p>{t('footer.institution')}</p>
       <p>{professor.sala.valor} · <a href={`mailto:${professor.email.valor}`}>{professor.email.valor}</a></p>
-      <p>{t('footer.project')} · {projeto.sigla}</p>
     </div>
 
     <div>

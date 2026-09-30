@@ -64,11 +64,15 @@ const portas = [
   <section class="section section--band" aria-labelledby="pesquisa">
     <div class="container research">
       <div class="research__text">
-        <SectionHeading id="pesquisa" eyebrow={`Projeto ${projeto.sigla} · ${projeto.codigo}`} title="O que o grupo pesquisa" />
-        <p class="prose">{projeto.resumo}</p>
+        <SectionHeading id="pesquisa" eyebrow="Pesquisa e extensão" title="O que o professor pesquisa" />
+        <p class="prose">{professor.pesquisa.resumo}</p>
+        <p class="prose">{professor.extensao.resumo}</p>
+        <p class="prose">
+          Entre os projetos em andamento estão a detecção de intrusão em redes elétricas inteligentes com o padrão IEC 61850
+          e a IA explicável aplicada a sistemas ciberfísicos. A página Pesquisa detalha temas, projetos e trabalhos publicados.
+        </p>
         <div class="cluster" aria-label="Temas">
-          {projeto.contexto.map((c) => <Tag>{c}</Tag>)}
-          {projeto.linhas.slice(0, 3).map((l) => <Tag>{l.nome.replace(/\s*\(.*\)/, '')}</Tag>)}
+          {['Cibersegurança', 'IA aplicada', 'Detecção de intrusão', 'XAI', 'LLMs', 'Educação 5.0', 'Engenharia de software', 'Extensão'].map((c) => <Tag>{c}</Tag>)}
         </div>
         <div class="research__actions">
           <Button href="/pesquisa/" variant="primary">{t('cta.research')}</Button>
@@ -110,16 +114,16 @@ const portas = [
 
   <section class="section section--tight" aria-labelledby="grupo">
     <div class="container">
-      <SectionHeading id="grupo" title="Quem está no grupo" lead="Bolsistas atuais e seus temas. A lista completa, com egressos, está na página Bolsistas." />
+      <SectionHeading id="grupo" title="Orientação" lead="O professor orienta mestrandos no PPGES (Unipampa) e no PPGCO (UFU), bolsistas de iniciação científica e de extensão, e trabalhos de conclusão de curso. A lista por área está na página Bolsistas." />
       <div class="grid grid--3">
-        {bolsistas.map((b) => (
-          <Card title={b.data.nome} href={`/bolsistas/${b.data.area}/${b.id}/`} tag={b.data.nivel} linkLabel="Ver tema">
-            <p>{b.data.tema}</p>
-          </Card>
-        ))}
-        <Card title="Quer entrar no grupo?" href="/bolsistas/#trabalhe" tag="Vagas" linkLabel="Como funciona">
-          <p>{professor.trabalheComigo.interesses}</p>
-        </Card>
+        {areas.map((a) => {
+          const n = bolsistas.filter((b) => b.data.area === a.id).length;
+          return (
+            <Card title={a.nome} href={`/bolsistas/${a.id}/`} tag={n > 0 ? `${n} ${n === 1 ? 'pessoa' : 'pessoas'}` : undefined} linkLabel="Ver bolsistas">
+              <p>{a.papel}</p>
+            </Card>
+          );
+        })}
       </div>
     </div>
   </section>

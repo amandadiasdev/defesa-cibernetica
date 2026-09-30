@@ -4,51 +4,53 @@ import SectionHeading from '../components/SectionHeading.astro';
 import Card from '../components/Card.astro';
 import Tag from '../components/Tag.astro';
 import Button from '../components/Button.astro';
+import Placeholder from '../components/Placeholder.astro';
 import { professor, projeto, sources } from '../data/professor';
 import { publicacoesDestaque } from '../data/publicacoes';
 import { url } from '../lib/url';
 
-const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XAI|explainable/i.test(p.titulo)).slice(0, 3);
+const destaques = publicacoesDestaque.slice(0, 3);
+const isPlaceholder = (v: string) => /^\{\{.*\}\}$/.test(v);
 ---
 
-<Base title="Pesquisa" description="O projeto XAIID: detecção de intrusão em sistemas ciberfísicos com aprendizado de máquina, inteligência artificial explicável, otimização de hiperparâmetros e seleção de características.">
+<Base title="Pesquisa" description="Pesquisa do professor Silvio Quincozes: cibersegurança e inteligência artificial aplicada, detecção de intrusões, explicabilidade, LLMs, educação e engenharia de software; extensão e projetos em andamento.">
   <section class="section">
     <div class="container">
-      <SectionHeading level="h1" eyebrow={`Projeto ${projeto.sigla} · ${projeto.codigo}`} title={projeto.titulo} lead={projeto.resumo} />
+      <SectionHeading level="h1" eyebrow={`Pesquisa · grupo ${professor.pesquisa.grupoNome}`} title="Cibersegurança e inteligência artificial aplicada" lead={professor.pesquisa.resumo} />
       <div class="cluster">
-        {projeto.contexto.map((c) => <Tag>{c}</Tag>)}
+        {['Detecção de intrusão', 'Sistemas ciberfísicos', 'IEC 61850', 'IoT', 'XAI', 'LLMs', 'Educação 5.0', 'Engenharia de software'].map((c) => <Tag>{c}</Tag>)}
       </div>
     </div>
   </section>
 
-  <section class="section section--band" aria-labelledby="linhas">
+  <section class="section section--band" aria-labelledby="temas">
     <div class="container">
-      <SectionHeading id="linhas" title="Cinco linhas, um objetivo" lead="Cada linha responde uma parte da pergunta: como detectar ataques em sistemas ciberfísicos de forma confiável e explicável?" />
+      <SectionHeading id="temas" title="Temas de pesquisa" lead="Seis frentes que se combinam: dados, otimização e explicabilidade de modelos, aplicados a segurança, educação e software." />
       <div class="grid grid--3">
-        {projeto.linhas.map((l, i) => (
-          <Card title={l.nome} tag={`Linha ${i + 1}`}>
-            <p>{l.descricao}</p>
+        {professor.pesquisa.temas.map((t, i) => (
+          <Card title={t.nome} tag={`Tema ${i + 1}`}>
+            <p>{t.descricao}</p>
           </Card>
         ))}
-        <Card title="Como as linhas se ligam" tag="Fluxo">
-          <p>Dados realistas (ERENO) alimentam modelos de detecção; a XAI mostra o que o modelo usa; a explicação orienta a seleção de características e o ajuste de hiperparâmetros; o ciclo recomeça com um modelo mais enxuto e auditável.</p>
-        </Card>
       </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="contexto">
+  <section class="section" aria-labelledby="extensao">
     <div class="container two-col">
       <div>
-        <SectionHeading id="contexto" title="Contexto de aplicação" />
-        <p class="prose">
-          O ponto de partida são as redes elétricas inteligentes e as subestações digitais, em que dispositivos eletrônicos inteligentes (IEDs)
-          trocam mensagens pelo padrão IEC 61850. Um ataque bem-sucedido nesse ambiente tem efeito físico, como a abertura indevida de um disjuntor.
-          Por isso o grupo trabalha com dados de tráfego realistas e avalia os detectores por classe de ataque, e não só pela acurácia geral.
-        </p>
-        <p class="prose">
-          Smart grids e IEC 61850 são o contexto inicial, não o limite: os métodos se aplicam a outros sistemas ciberfísicos e à Internet das Coisas industrial.
-        </p>
+        <SectionHeading id="extensao" title="Extensão" lead={professor.extensao.resumo} />
+        <div class="grid grid--2">
+          {professor.extensao.iniciativas.map((i) => (
+            <Card title={i.nome} href={isPlaceholder(i.url) ? undefined : i.url} linkLabel={isPlaceholder(i.url) ? undefined : 'Abrir'}>
+              <p>{isPlaceholder(i.descricao) ? <Placeholder value={i.descricao} label="descrição a confirmar" /> : i.descricao}</p>
+            </Card>
+          ))}
+          <Card title="Bolsistas de extensão">
+            <p>Quem participa das ações de extensão tem trilha e lista próprias na área dos bolsistas.</p>
+            <p><a href={url("/bolsistas/extensao/")}>Ver a área de extensão →</a></p>
+          </Card>
+        </div>
       </div>
       <div>
         <SectionHeading id="parcerias" title="Parcerias" />
@@ -63,9 +65,24 @@ const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XA
     </div>
   </section>
 
-  <section class="section section--band" aria-labelledby="destaques">
+  <section class="section section--band" aria-labelledby="projetos">
     <div class="container">
-      <SectionHeading id="destaques" title="Trabalhos ligados ao projeto" lead="Três publicações do professor diretamente relacionadas ao tema." />
+      <SectionHeading id="projetos" title="Projetos em andamento" lead="Um recorte dos projetos do grupo. Outros projetos entram conforme forem confirmados." />
+      <div class="grid grid--2">
+        <Card title={projeto.titulo} tag={`${projeto.sigla} · ${projeto.codigo}`}>
+          <p>{projeto.resumo}</p>
+          <p class="cluster">{projeto.contexto.map((c) => <Tag>{c}</Tag>)}</p>
+        </Card>
+        <Card title="Outros projetos" tag="a confirmar">
+          <p>Projetos de pesquisa, extensão e ensino com os programas PPGES (Unipampa) e PPGCO (UFU) e com as instituições parceiras. <Placeholder value="{{A_CONFIRMAR}}" label="lista a confirmar" /></p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="destaques">
+    <div class="container">
+      <SectionHeading id="destaques" title="Trabalhos em destaque" lead="Três dos trabalhos mais citados do professor." />
       <div class="grid grid--3">
         {destaques.map((p) => (
           <Card title={p.titulo} tag={String(p.ano)}>
@@ -81,9 +98,9 @@ const destaques = publicacoesDestaque.filter((p) => /IEC|substation|intrusion|XA
     </div>
   </section>
 
-  <section class="section" aria-labelledby="participar">
+  <section class="section section--band" aria-labelledby="participar">
     <div class="container">
-      <SectionHeading id="participar" title="Quer participar?" lead="Iniciação científica, TCC, mestrado e doutorado. A página dos bolsistas explica a trilha de estudo e o que se espera de quem entra." />
+      <SectionHeading id="participar" title="Quer participar?" lead="Iniciação científica, extensão, TCC, mestrado e doutorado. A página dos bolsistas explica as trilhas e o que se espera de quem entra." />
       <Button href="/bolsistas/" variant="primary">Área dos bolsistas</Button>
     </div>
   </section>

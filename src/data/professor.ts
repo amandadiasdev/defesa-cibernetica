@@ -18,6 +18,8 @@ export const sources = {
   trabalhe: { id: 3, label: 'Página "Trabalhe comigo"', url: 'https://sites.unipampa.edu.br/silvioquincozes/trabalhe-comigo/' },
   scholar: { id: 4, label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=1eDPdn8AAAAJ&hl=pt-BR' },
   grupo: { id: 5, label: 'Informação do grupo de pesquisa (30/09/2026); página do PPGES', url: 'https://cursos.unipampa.edu.br/cursos/ppges/professores/' },
+  ppges: { id: 6, label: 'Perfil no PPGES', url: 'https://cursos.unipampa.edu.br/cursos/ppges/professores/' },
+  orientandos: { id: 7, label: 'Página Orientandos', url: 'https://sites.unipampa.edu.br/silvioquincozes/orientandos/' },
 } as const;
 
 export const dataConferida = '29/09/2026';
@@ -52,6 +54,29 @@ export const professor = {
     { nome: 'Dispositivos eletrônicos inteligentes (IEDs)', fonte: sources.sobre },
     { nome: 'Padrão IEC 61850', fonte: sources.sobre },
   ],
+  /** Descrição de pesquisa, parafraseada do perfil no PPGES [6]. */
+  pesquisa: {
+    resumo:
+      'Cibersegurança e inteligência artificial aplicada, incluindo modelos de linguagem (LLMs). O trabalho vai da geração e aquisição de dados para processamento com IA, passando por otimização (hiperparâmetros, engenharia de prompts, extração e seleção de características), até a explicabilidade dos modelos, com ênfase em detecção de intrusões, educação (microlearning, aprendizagem adaptativa, inteligência aumentada) e engenharia de software.',
+    grupoNome: 'Defesa Cibernética',
+    temas: [
+      { nome: 'Detecção de intrusões', descricao: 'Sistemas que observam o tráfego de redes e sistemas ciberfísicos, como subestações digitais e redes IEC 61850, e sinalizam ataques.' },
+      { nome: 'Dados para inteligência artificial', descricao: 'Geração e aquisição de dados realistas para treinar e avaliar modelos, como o framework ERENO para tráfego IEC 61850.' },
+      { nome: 'Otimização de modelos', descricao: 'Ajuste de hiperparâmetros, engenharia de prompts e extração e seleção de características para modelos mais precisos e mais enxutos.' },
+      { nome: 'Explicabilidade (XAI)', descricao: 'Métodos que mostram o que pesou na decisão de um modelo, para que alarmes e recomendações possam ser auditados.' },
+      { nome: 'LLMs aplicados à segurança e à educação', descricao: 'Modelos de linguagem em tarefas de cibersegurança e em microlearning, aprendizagem adaptativa e inteligência aumentada (Educação 5.0).' },
+      { nome: 'Engenharia de software segura', descricao: 'Práticas e ferramentas para construir software com segurança desde o projeto, tema também da disciplina de Engenharia de Software Seguro.' },
+    ],
+    fonte: sources.ppges,
+  },
+  /** Extensão: informação do grupo (30/09/2026). Detalhes do Codefólio a confirmar. */
+  extensao: {
+    resumo: 'Na extensão, o professor leva o conhecimento do grupo para a comunidade, com iniciativas como o Codefólio, e traz de volta as necessidades de quem está fora da universidade.',
+    iniciativas: [
+      { nome: 'Codefólio', descricao: '{{O_QUE_E_O_CODEFOLIO}}', url: A_CONFIRMAR },
+    ],
+    fonte: sources.grupo,
+  },
   interessesScholar: ['Cyber Security', 'Machine Learning', 'Intrusion Detection', 'IEC-61850', 'Internet of Things'],
   parcerias: { valor: ['UFSM', 'UFF', 'UFU', 'University of Pittsburgh'], fonte: sources.trabalhe },
   metricasScholar: {
