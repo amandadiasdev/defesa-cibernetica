@@ -53,7 +53,7 @@ import { url } from '../lib/url';
           <li><strong>Graduação:</strong> disciplinas de {professor.disciplinas.map((d) => d.nome).join(', ')} (detalhes na página <a href={url('/ensino/')}>Ensino</a>).</li>
           <li><strong>Coordenação:</strong> {professor.coordenacao.valor}.</li>
           <li><strong>Pós-graduação:</strong> orientação de mestrado e doutorado no PPGES (Unipampa) e no PPGCO (UFU).</li>
-          <li><strong>Pesquisa:</strong> projeto XAIID (2023.PE.AL.2578), descrito na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
+          <li><strong>Pesquisa:</strong> cibersegurança e inteligência artificial aplicada, descrita na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
           <li><strong>Parcerias:</strong> {professor.parcerias.valor.join(', ')}.</li>
         </ul>
       </div>

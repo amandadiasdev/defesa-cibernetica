@@ -105,18 +105,3 @@ export const professor = {
   },
 } as const;
 
-export const projeto = {
-  sigla: 'XAIID',
-  codigo: '2023.PE.AL.2578',
-  titulo: 'Detecção de intrusão em sistemas ciberfísicos com aprendizado de máquina e inteligência artificial explicável',
-  resumo:
-    'O projeto investiga sistemas de detecção de intrusão (IDS) para sistemas ciberfísicos, combinando aprendizado de máquina, inteligência artificial explicável (XAI), otimização de hiperparâmetros e seleção de características. O contexto inicial são as redes elétricas inteligentes (smart grids) e o padrão IEC 61850, com apoio do framework ERENO para geração de dados realistas.',
-  linhas: [
-    { nome: 'Detecção de intrusão (IDS)', descricao: 'Modelos que observam o tráfego da rede e sinalizam comportamentos anômalos ou ataques conhecidos.' },
-    { nome: 'Aprendizado de máquina', descricao: 'Classificadores treinados com dados rotulados de tráfego normal e de ataque, avaliados com métricas por classe.' },
-    { nome: 'Inteligência artificial explicável (XAI)', descricao: 'Métodos que mostram quais características pesaram na decisão do modelo, para que um analista consiga confiar e auditar o alarme.' },
-    { nome: 'Otimização de hiperparâmetros (HPO)', descricao: 'Busca sistemática pelas configurações do modelo que melhoram detecção sem inflar falsos alarmes.' },
-    { nome: 'Seleção de características', descricao: 'Escolha do subconjunto de atributos do tráfego que mantém o desempenho com menos custo e mais interpretabilidade.' },
-  ],
-  contexto: ['Smart grids', 'IEC 61850', 'Subestações digitais', 'ERENO', 'Agentic AI'],
-} as const;

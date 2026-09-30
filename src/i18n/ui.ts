@@ -34,7 +34,6 @@ export const ui = {
     'theme.light': 'Tema claro',
     'theme.dark': 'Tema escuro',
     'footer.institution': 'Universidade Federal do Pampa (Unipampa) · Campus Alegrete',
-    'footer.project': 'Projeto XAIID · 2023.PE.AL.2578',
     'footer.profiles': 'Perfis',
     'footer.sections': 'Seções',
     'footer.source': 'Fonte dos dados',

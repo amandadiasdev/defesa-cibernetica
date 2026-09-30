@@ -5,7 +5,7 @@ import Card from '../components/Card.astro';
 import Tag from '../components/Tag.astro';
 import Button from '../components/Button.astro';
 import Placeholder from '../components/Placeholder.astro';
-import { professor, projeto, sources } from '../data/professor';
+import { professor, sources } from '../data/professor';
 import { publicacoesDestaque } from '../data/publicacoes';
 import { url } from '../lib/url';
 
@@ -65,22 +65,7 @@ const isPlaceholder = (v: string) => /^\{\{.*\}\}$/.test(v);
     </div>
   </section>
 
-  <section class="section section--band" aria-labelledby="projetos">
-    <div class="container">
-      <SectionHeading id="projetos" title="Projetos em andamento" lead="Um recorte dos projetos do grupo. Outros projetos entram conforme forem confirmados." />
-      <div class="grid grid--2">
-        <Card title={projeto.titulo} tag={`${projeto.sigla} · ${projeto.codigo}`}>
-          <p>{projeto.resumo}</p>
-          <p class="cluster">{projeto.contexto.map((c) => <Tag>{c}</Tag>)}</p>
-        </Card>
-        <Card title="Outros projetos" tag="a confirmar">
-          <p>Projetos de pesquisa, extensão e ensino com os programas PPGES (Unipampa) e PPGCO (UFU) e com as instituições parceiras. <Placeholder value="{{A_CONFIRMAR}}" label="lista a confirmar" /></p>
-        </Card>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="destaques">
+  <section class="section section--band" aria-labelledby="destaques">
     <div class="container">
       <SectionHeading id="destaques" title="Trabalhos em destaque" lead="Três dos trabalhos mais citados do professor." />
       <div class="grid grid--3">
@@ -98,7 +83,7 @@ const isPlaceholder = (v: string) => /^\{\{.*\}\}$/.test(v);
     </div>
   </section>
 
-  <section class="section section--band" aria-labelledby="participar">
+  <section class="section" aria-labelledby="participar">
     <div class="container">
       <SectionHeading id="participar" title="Quer participar?" lead="Iniciação científica, extensão, TCC, mestrado e doutorado. A página dos bolsistas explica as trilhas e o que se espera de quem entra." />
       <Button href="/bolsistas/" variant="primary">Área dos bolsistas</Button>

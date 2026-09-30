@@ -21,7 +21,7 @@ export const areas: Area[] = [
     nome: 'Pesquisa',
     titulo: 'Bolsistas de pesquisa',
     descricao:
-      'Iniciação científica, mestrado e doutorado no projeto XAIID: detecção de intrusão em sistemas ciberfísicos com aprendizado de máquina e IA explicável.',
+      'Iniciação científica, mestrado e doutorado em cibersegurança e inteligência artificial aplicada: detecção de intrusões, explicabilidade de modelos e dados para IA.',
     papel: 'Formula uma pergunta, roda experimentos com dados realistas e registra o que funcionou e o que não funcionou.',
   },
   {

@@ -1,6 +1,6 @@
 # Site · Prof. Silvio Ereno Quincozes
 
-Site pessoal e institucional do professor Silvio Ereno Quincozes (Unipampa, campus Alegrete), coordenador do PPGES e pesquisador do projeto XAIID (2023.PE.AL.2578), e porta de entrada dos bolsistas do grupo.
+Site pessoal e institucional do professor Silvio Ereno Quincozes (Unipampa, campus Alegrete), coordenador do PPGES, e porta de entrada dos bolsistas do grupo.
 
 Site estático gerado com [Astro](https://astro.build) e publicado no GitHub Pages. Sem servidor, sem banco de dados.
 

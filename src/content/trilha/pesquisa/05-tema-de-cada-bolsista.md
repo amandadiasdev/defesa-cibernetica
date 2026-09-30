@@ -16,7 +16,7 @@ Ter passado pelos quatro degraus anteriores, ao menos na leitura.
 
 ## Ideia principal
 
-O projeto XAIID combina cinco linhas: detecção de intrusão, aprendizado de máquina, XAI, otimização de hiperparâmetros e seleção de características. Cada bolsista pega um pedaço dessa combinação e transforma em uma **pergunta de pesquisa** respondível com um experimento.
+A pesquisa do grupo combina cinco linhas: detecção de intrusão, aprendizado de máquina, XAI, otimização de hiperparâmetros e seleção de características. Cada bolsista pega um pedaço dessa combinação e transforma em uma **pergunta de pesquisa** respondível com um experimento.
 
 Um bom cartão de bolsista cabe em quatro linhas:
 
@@ -35,7 +35,7 @@ Os repositórios do grupo seguem uma organização parecida: uma pasta de leitur
 
 ## Onde a agentic AI entra
 
-A agenda institucional do projeto menciona agentes de inteligência artificial. No grupo, um agente só entra quando serve a uma pergunta de pesquisa e quando há como verificar o que ele fez; uma narrativa gerada por agente não substitui uma medição nem uma análise de XAI validada. Se o seu tema envolver agentes, registre modelo, prompts, ferramentas e saídas como parte do experimento.
+A agenda institucional do grupo menciona agentes de inteligência artificial. No grupo, um agente só entra quando serve a uma pergunta de pesquisa e quando há como verificar o que ele fez; uma narrativa gerada por agente não substitui uma medição nem uma análise de XAI validada. Se o seu tema envolver agentes, registre modelo, prompts, ferramentas e saídas como parte do experimento.
 
 ## O que você vai conseguir fazer depois
 
