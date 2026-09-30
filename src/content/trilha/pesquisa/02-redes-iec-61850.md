@@ -1,4 +1,5 @@
 ---
+area: pesquisa
 ordem: 2
 titulo: Onde as mensagens moram? Redes e o padrão IEC 61850
 pergunta: Como os equipamentos de uma subestação conversam entre si?

@@ -10,16 +10,17 @@ import SectionHeading from '../components/SectionHeading.astro';
 import { useTranslations } from '../i18n/ui';
 import { professor, projeto, sources } from '../data/professor';
 import { url } from '../lib/url';
+import { areas } from '../data/areas';
 
 const t = useTranslations('pt-BR');
-const trilha = (await getCollection('trilha')).sort((a, b) => a.data.ordem - b.data.ordem);
+const trilha = await getCollection('trilha');
 const bolsistas = (await getCollection('bolsistas')).filter((b) => b.data.status === 'atual');
 
 const portas = [
   {
     tag: t('label.new'),
     title: 'Bolsista novo',
-    href: '/bolsistas/#trilha',
+    href: '/bolsistas/',
     linkLabel: t('cta.startTrail'),
     text: 'Trilha de estudo em cinco degraus: do sistema ciberfísico até o tema de cada bolsista, com glossário.',
   },
@@ -80,26 +81,29 @@ const portas = [
     </div>
   </section>
 
-  <section class="section" aria-labelledby="trilha">
+  <section class="section" aria-labelledby="areas">
     <div class="container">
       <SectionHeading
-        id="trilha"
+        id="areas"
         eyebrow="Para quem está chegando"
-        title="A trilha em cinco degraus"
-        lead="Cada degrau responde uma pergunta que o degrau seguinte precisa. Leia de cima para baixo; quem já está no grupo pula direto para o quinto."
+        title="Três áreas, três trilhas"
+        lead="Pesquisa, extensão e outros programas. Cada área tem uma trilha em degraus: cada degrau responde uma pergunta que o seguinte precisa."
       />
       <ol class="steps">
-        {trilha.map((d) => (
-          <li class="steps__item">
-            <a class="steps__link" href={url(`/trilha/${d.id}/`)}>
-              <span class="steps__num" aria-hidden="true">{d.data.ordem}</span>
-              <span class="steps__body">
-                <span class="steps__title">{d.data.titulo}</span>
-                <span class="steps__q">{d.data.pergunta}</span>
-              </span>
-            </a>
-          </li>
-        ))}
+        {areas.map((a, i) => {
+          const n = trilha.filter((d) => d.data.area === a.id).length;
+          return (
+            <li class="steps__item">
+              <a class="steps__link" href={url(`/bolsistas/${a.id}/`)}>
+                <span class="steps__num" aria-hidden="true">{i + 1}</span>
+                <span class="steps__body">
+                  <span class="steps__title">{a.nome}</span>
+                  <span class="steps__q">{a.papel} {a.emConstrucao ? '· trilha em construção' : `· ${n} degraus`}</span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ol>
     </div>
   </section>
@@ -109,7 +113,7 @@ const portas = [
       <SectionHeading id="grupo" title="Quem está no grupo" lead="Bolsistas atuais e seus temas. A lista completa, com egressos, está na página Bolsistas." />
       <div class="grid grid--3">
         {bolsistas.map((b) => (
-          <Card title={b.data.nome} href={`/bolsistas/${b.id}/`} tag={b.data.nivel} linkLabel="Ver tema">
+          <Card title={b.data.nome} href={`/bolsistas/${b.data.area}/${b.id}/`} tag={b.data.nivel} linkLabel="Ver tema">
             <p>{b.data.tema}</p>
           </Card>
         ))}

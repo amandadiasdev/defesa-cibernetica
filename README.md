@@ -29,7 +29,8 @@ Outros comandos: `npm run build` gera a pasta `dist/`; `npm run preview` serve o
 | Publicações em destaque | `src/data/publicacoes.ts` |
 | Links de sistemas (Codefólio, datasets, ferramentas) | `src/data/sistemas.ts` |
 | Um bolsista | `src/content/bolsistas/<nome>.md` (copie `_modelo.md`) |
-| Um degrau da trilha | `src/content/trilha/0N-nome.md` |
+| Um degrau de trilha | `src/content/trilha/<area>/0N-nome.md` (áreas: pesquisa, extensao, outros) |
+| Nome e descrição de uma área | `src/data/areas.ts` |
 | Glossário | `src/content/glossario.json` |
 | Cores, raios, fontes (brandkit E4) | `src/styles/tokens.css` |
 | Textos de menu, botões e rodapé (para o inglês) | `src/i18n/ui.ts` |

@@ -1,4 +1,5 @@
 ---
+area: pesquisa
 ordem: 3
 titulo: Como perceber o ataque? IDS e aprendizado de máquina
 pergunta: Como um programa aprende a separar tráfego normal de tráfego malicioso?

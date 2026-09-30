@@ -1,4 +1,5 @@
 ---
+area: pesquisa
 ordem: 1
 titulo: Por que proteger um sistema ciberfísico?
 pergunta: O que é um sistema ciberfísico e o que quebra quando ele é atacado?

@@ -1,4 +1,5 @@
 ---
+area: pesquisa
 ordem: 4
 titulo: Como confiar no alarme? Inteligência artificial explicável
 pergunta: O modelo disse "ataque". Por quê? E dá para confiar nesse porquê?

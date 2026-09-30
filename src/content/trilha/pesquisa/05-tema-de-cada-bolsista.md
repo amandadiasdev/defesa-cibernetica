@@ -1,4 +1,5 @@
 ---
+area: pesquisa
 ordem: 5
 titulo: O que cada bolsista faz?
 pergunta: Como o meu tema se liga aos degraus anteriores e ao trabalho dos colegas?

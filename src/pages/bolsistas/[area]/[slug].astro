@@ -1,26 +1,28 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
-import Tag from '../../components/Tag.astro';
-import Button from '../../components/Button.astro';
-import { url } from '../../lib/url';
+import Base from '../../../layouts/Base.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import Tag from '../../../components/Tag.astro';
+import Button from '../../../components/Button.astro';
+import { areaById } from '../../../data/areas';
+import { url } from '../../../lib/url';
 
 export async function getStaticPaths() {
   const bolsistas = await getCollection('bolsistas');
-  return bolsistas.map((b) => ({ params: { slug: b.id }, props: { entry: b } }));
+  return bolsistas.map((b) => ({ params: { area: b.data.area, slug: b.id }, props: { entry: b } }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+const area = areaById(d.area);
 ---
 
-<Base title={d.nome} description={`${d.nome}, ${d.nivel.toLowerCase()} no projeto XAIID: ${d.tema}`}>
+<Base title={d.nome} description={`${d.nome}, ${d.nivel.toLowerCase()} em ${area?.nome.toLowerCase()}: ${d.tema}`}>
   <section class="section">
     <div class="container">
-      <p><a href={url('/bolsistas/')}>← Bolsistas</a></p>
-      <SectionHeading level="h1" eyebrow={`${d.nivel} · ${d.status === 'atual' ? 'bolsista atual' : 'egresso'}`} title={d.nome} lead={d.tema} />
+      <p><a href={url(`/bolsistas/${d.area}/`)}>← {area?.titulo ?? 'Bolsistas'}</a></p>
+      <SectionHeading level="h1" eyebrow={`${d.nivel} · ${area?.nome ?? d.area} · ${d.status === 'atual' ? 'bolsista atual' : 'egresso'}`} title={d.nome} lead={d.tema} />
       <div class="cluster">
         {d.tags.map((t) => <Tag>{t}</Tag>)}
       </div>
@@ -41,7 +43,7 @@ const d = entry.data;
         {d.degrau && (
           <div>
             <dt>Na trilha</dt>
-            <dd>Degrau {d.degrau}</dd>
+            <dd>Degrau {d.degrau} de {area?.nome.toLowerCase()}</dd>
           </div>
         )}
         {d.repositorio && (
@@ -60,7 +62,7 @@ const d = entry.data;
       </div>
 
       <div class="cluster" style="margin-top: var(--space-5)">
-        <Button href="/bolsistas/" variant="secondary">Todos os bolsistas</Button>
+        <Button href={`/bolsistas/${d.area}/`} variant="secondary">Todos de {area?.nome.toLowerCase()}</Button>
         <Button href="/sistemas/" variant="link">Sistemas e repositórios</Button>
       </div>
     </div>

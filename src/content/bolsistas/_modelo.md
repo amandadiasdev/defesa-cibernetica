@@ -3,6 +3,7 @@
 # Arquivos que começam com "_" não aparecem no site.
 nome: Nome Completo
 nivel: Iniciação científica   # Iniciação científica | TCC | Mestrado | Doutorado
+area: pesquisa                # pesquisa | extensao | outros
 status: atual                 # atual | egresso
 tema: Uma frase com o tema
 pergunta: A pergunta de pesquisa em uma frase (opcional)

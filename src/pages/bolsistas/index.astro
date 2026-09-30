@@ -6,76 +6,31 @@ import Card from '../../components/Card.astro';
 import Button from '../../components/Button.astro';
 import SourceNote from '../../components/SourceNote.astro';
 import { professor, sources } from '../../data/professor';
-import { url } from '../../lib/url';
+import { areas } from '../../data/areas';
 
-const trilha = (await getCollection('trilha')).sort((a, b) => a.data.ordem - b.data.ordem);
-const todos = await getCollection('bolsistas');
-const atuais = todos.filter((b) => b.data.status === 'atual').sort((a, b) => a.data.nome.localeCompare(b.data.nome));
-const egressos = todos.filter((b) => b.data.status === 'egresso').sort((a, b) => a.data.nome.localeCompare(b.data.nome));
+const trilha = await getCollection('trilha');
+const bolsistas = await getCollection('bolsistas');
 const glossario = (await getCollection('glossario')).sort((a, b) => a.data.degrau - b.data.degrau || a.data.termo.localeCompare(b.data.termo));
+
+const resumo = areas.map((a) => ({
+  area: a,
+  degraus: trilha.filter((d) => d.data.area === a.id).length,
+  atuais: bolsistas.filter((b) => b.data.area === a.id && b.data.status === 'atual').length,
+}));
 ---
 
-<Base title="Bolsistas" description="Área dos bolsistas do projeto XAIID: trilha de estudo em cinco degraus, glossário, lista de bolsistas e como entrar no grupo.">
+<Base title="Bolsistas" description="Área dos bolsistas: pesquisa, extensão e outros programas, cada um com a própria trilha de estudo, lista de bolsistas, glossário e como entrar no grupo.">
   <section class="section">
     <div class="container">
-      <SectionHeading level="h1" eyebrow="Área dos bolsistas" title="Do conceito geral até o seu tema" lead="Quem chega agora começa pela trilha. Quem já está no grupo vai direto aos cartões dos colegas e à página Sistemas." />
-      <div class="cluster">
-        <Button href="#trilha" variant="primary">Começar a trilha</Button>
-        <Button href="#glossario" variant="secondary">Glossário</Button>
-        <Button href="#trabalhe" variant="secondary">Como entrar no grupo</Button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--band" aria-labelledby="trilha">
-    <div class="container">
-      <SectionHeading id="trilha" title="Trilha em cinco degraus" lead="Pense em uma escada: cada degrau responde uma pergunta que o seguinte precisa. Nenhum degrau exige mais que uma tarde." />
-      <ol class="grid grid--3 steps">
-        {trilha.map((d) => (
-          <li>
-            <Card title={d.data.titulo} href={`/trilha/${d.id}/`} tag={`Degrau ${d.data.ordem}`} linkLabel="Ler o degrau" as="div">
-              <p>{d.data.pergunta}</p>
-              {d.data.tempo && <p class="caption">Tempo estimado: {d.data.tempo}</p>}
-            </Card>
-          </li>
-        ))}
-        <li>
-          <Card title="Como usar a trilha" tag="Dica" as="div">
-            <p>Leia o degrau, faça o exercício sugerido e anote dúvidas para a reunião de orientação. Cada página termina com "o que você vai conseguir fazer": use como checklist.</p>
+      <SectionHeading level="h1" eyebrow="Área dos bolsistas" title="Três áreas, três trilhas" lead="Escolha a sua área. Cada uma tem uma trilha de estudo em degraus e a lista de quem já está lá. Quem chega agora começa pelo degrau 1; quem já está no grupo vai direto aos cartões dos colegas." />
+      <div class="grid grid--3">
+        {resumo.map(({ area, degraus, atuais }) => (
+          <Card title={area.nome} href={`/bolsistas/${area.id}/`} tag={area.emConstrucao ? 'trilha em construção' : `${degraus} degraus`} linkLabel="Entrar">
+            <p>{area.descricao}</p>
+            <p class="caption">{atuais === 0 ? 'Nenhum bolsista cadastrado' : atuais === 1 ? '1 bolsista atual' : `${atuais} bolsistas atuais`} · {degraus} {degraus === 1 ? 'degrau' : 'degraus'} na trilha</p>
           </Card>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="atuais">
-    <div class="container">
-      <SectionHeading id="atuais" title="Bolsistas atuais" lead="Um cartão por pessoa: nível, tema e repositório. Clique para ver a pergunta de pesquisa." />
-      {atuais.length > 0 ? (
-        <div class="grid grid--3">
-          {atuais.map((b) => (
-            <Card title={b.data.nome} href={`/bolsistas/${b.id}/`} tag={b.data.nivel} linkLabel="Ver cartão">
-              <p>{b.data.tema}</p>
-              {b.data.degrau && <p class="caption">Na trilha: degrau {b.data.degrau}</p>}
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <p>Nenhum bolsista cadastrado ainda.</p>
-      )}
-      <p class="caption" style="margin-top: var(--space-4)">
-        Para adicionar alguém, copie o arquivo <code>src/content/bolsistas/_modelo.md</code> no repositório do site e preencha.
-      </p>
-      {egressos.length > 0 && (
-        <>
-          <h3 style="margin-top: var(--space-6)">Egressos</h3>
-          <ul>
-            {egressos.map((b) => (
-              <li><a href={url(`/bolsistas/${b.id}/`)}>{b.data.nome}</a> · {b.data.nivel} · {b.data.tema}</li>
-            ))}
-          </ul>
-        </>
-      )}
+        ))}
+      </div>
     </div>
   </section>
 
@@ -102,28 +57,26 @@ const glossario = (await getCollection('glossario')).sort((a, b) => a.data.degra
 
   <section class="section" aria-labelledby="glossario">
     <div class="container">
-      <SectionHeading id="glossario" title="Glossário" lead="Termos na ordem em que aparecem na trilha. Sigla entre parênteses quando existe." />
+      <SectionHeading id="glossario" title="Glossário" lead="Termos usados nas trilhas, na ordem em que aparecem. Sigla entre parênteses quando existe." />
       <dl class="glossary">
         {glossario.map((g) => (
           <div class="glossary__item" id={`termo-${g.id}`}>
             <dt>
               {g.data.termo}{g.data.sigla && g.data.sigla !== g.data.termo ? ` (${g.data.sigla})` : ''}
-              <span class="glossary__step">degrau {g.data.degrau}</span>
+              <span class="glossary__step">{g.data.area} · degrau {g.data.degrau}</span>
             </dt>
             <dd>{g.data.explicacao}</dd>
           </div>
         ))}
       </dl>
+      <p class="caption" style="margin-top: var(--space-4)">
+        Para adicionar um bolsista, copie <code>src/content/bolsistas/_modelo.md</code> no repositório do site; para um degrau novo, crie um arquivo em <code>src/content/trilha/&lt;area&gt;/</code>.
+      </p>
     </div>
   </section>
 </Base>
 
 <style>
-  .steps {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
   .glossary {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

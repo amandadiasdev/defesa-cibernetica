@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import Card from '../../../components/Card.astro';
+import Button from '../../../components/Button.astro';
+import { areas, splitTrilhaId } from '../../../data/areas';
+import { url } from '../../../lib/url';
+
+export async function getStaticPaths() {
+  return areas.map((a) => ({ params: { area: a.id }, props: { area: a } }));
+}
+
+const { area } = Astro.props;
+const trilha = (await getCollection('trilha')).filter((d) => d.data.area === area.id).sort((a, b) => a.data.ordem - b.data.ordem);
+const todos = (await getCollection('bolsistas')).filter((b) => b.data.area === area.id);
+const atuais = todos.filter((b) => b.data.status === 'atual').sort((a, b) => a.data.nome.localeCompare(b.data.nome));
+const egressos = todos.filter((b) => b.data.status === 'egresso').sort((a, b) => a.data.nome.localeCompare(b.data.nome));
+const outras = areas.filter((a) => a.id !== area.id);
+---
+
+<Base title={area.titulo} description={`${area.titulo}: trilha de estudo e bolsistas. ${area.descricao}`}>
+  <section class="section">
+    <div class="container">
+      <p><a href={url('/bolsistas/')}>← Área dos bolsistas</a></p>
+      <SectionHeading level="h1" eyebrow={`Bolsistas · ${area.nome}`} title={area.titulo} lead={area.descricao} />
+      <p class="prose"><strong>O que o bolsista faz aqui:</strong> {area.papel}</p>
+      <div class="cluster">
+        <Button href="#trilha" variant="primary">Começar a trilha</Button>
+        <Button href="#atuais" variant="secondary">Quem está aqui</Button>
+        <Button href="/bolsistas/#glossario" variant="link">Glossário</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="trilha">
+    <div class="container">
+      <SectionHeading
+        id="trilha"
+        title={`Trilha de ${area.nome.toLowerCase()} em ${trilha.length} ${trilha.length === 1 ? 'degrau' : 'degraus'}`}
+        lead={area.emConstrucao ? 'Esta trilha está sendo escrita. O primeiro degrau já dá o ponto de partida; os próximos entram conforme forem confirmados com o professor.' : 'Pense em uma escada: cada degrau responde uma pergunta que o seguinte precisa. Nenhum degrau exige mais que uma tarde.'}
+      />
+      <ol class="grid grid--3 steps">
+        {trilha.map((d) => {
+          const { slug } = splitTrilhaId(d.id);
+          return (
+            <li>
+              <Card title={d.data.titulo} href={`/trilha/${area.id}/${slug}/`} tag={`Degrau ${d.data.ordem}`} linkLabel="Ler o degrau" as="div">
+                <p>{d.data.pergunta}</p>
+                {d.data.tempo && <p class="caption">Tempo estimado: {d.data.tempo}</p>}
+              </Card>
+            </li>
+          );
+        })}
+        <li>
+          <Card title="Como usar a trilha" tag="Dica" as="div">
+            <p>Leia o degrau, faça o exercício sugerido e anote dúvidas para a reunião de orientação. Cada página termina com "o que você vai conseguir fazer": use como checklist.</p>
+          </Card>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="atuais">
+    <div class="container">
+      <SectionHeading id="atuais" title={`Quem está em ${area.nome.toLowerCase()}`} lead="Um cartão por pessoa: nível, tema e repositório. Clique para ver o cartão completo." />
+      {atuais.length > 0 ? (
+        <div class="grid grid--3">
+          {atuais.map((b) => (
+            <Card title={b.data.nome} href={`/bolsistas/${area.id}/${b.id}/`} tag={b.data.nivel} linkLabel="Ver cartão">
+              <p>{b.data.tema}</p>
+              {b.data.degrau && <p class="caption">Na trilha: degrau {b.data.degrau}</p>}
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <p class="prose">Nenhum bolsista cadastrado nesta área ainda. Para adicionar alguém, copie <code>src/content/bolsistas/_modelo.md</code> e use <code>area: {area.id}</code>.</p>
+      )}
+      {egressos.length > 0 && (
+        <>
+          <h3 style="margin-top: var(--space-6)">Egressos</h3>
+          <ul>
+            {egressos.map((b) => (
+              <li><a href={url(`/bolsistas/${area.id}/${b.id}/`)}>{b.data.nome}</a> · {b.data.nivel} · {b.data.tema}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--band">
+    <div class="container">
+      <SectionHeading title="Outras áreas" />
+      <div class="grid grid--2">
+        {outras.map((a) => (
+          <Card title={a.nome} href={`/bolsistas/${a.id}/`} linkLabel="Entrar">
+            <p>{a.descricao}</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
