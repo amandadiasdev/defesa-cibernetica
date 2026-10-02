@@ -10,7 +10,7 @@ import { defineConfig } from 'astro/config';
  *   BASE_PATH=/ npm run dev
  */
 const SITE = process.env.SITE_URL ?? 'https://amandadiasdev.github.io';
-const BASE = process.env.BASE_PATH ?? '/site-silvio-quincozes';
+const BASE = process.env.BASE_PATH ?? '/defesa-cibernetica';
 
 export default defineConfig({
   site: SITE,

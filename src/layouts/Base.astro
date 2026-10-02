@@ -29,8 +29,8 @@ const ogImage = new URL(url(image), Astro.site ?? 'http://localhost:4321');
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href={url('/logo-dc.png')} type="image/png" />
-    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={url('/logo-dc.svg')} type="image/svg+xml" />
+    <link rel="alternate icon" href={url('/logo-dc.png')} type="image/png" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#111111" />
 

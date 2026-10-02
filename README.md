@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Abre em `http://localhost:4321/site-silvio-quincozes/` (o caminho `/site-silvio-quincozes` vem do `base` em `astro.config.mjs`; para testar na raiz use `BASE_PATH=/ npm run dev`).
+Abre em `http://localhost:4321/defesa-cibernetica/` (o caminho `/defesa-cibernetica` vem do `base` em `astro.config.mjs`; para testar na raiz use `BASE_PATH=/ npm run dev`).
 
 Outros comandos: `npm run build` gera a pasta `dist/`; `npm run preview` serve o build; `npm run check` roda a verificação de tipos.
 
