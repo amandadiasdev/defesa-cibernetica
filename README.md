@@ -1,6 +1,6 @@
-# Site · Prof. Silvio Ereno Quincozes
+# Defesa Cibernética · site do grupo
 
-Site pessoal e institucional do professor Silvio Ereno Quincozes (Unipampa, campus Alegrete), coordenador do PPGES, e porta de entrada dos bolsistas do grupo.
+Site do grupo de pesquisa Defesa Cibernética (subgrupo do AI Horizon Labs; Unipampa, UFU e UFSM), coordenado pelo professor Silvio Ereno Quincozes. Reúne projetos, orientandos com trilhas de estudo, publicações, sistemas e o perfil do coordenador.
 
 Site estático gerado com [Astro](https://astro.build) e publicado no GitHub Pages. Sem servidor, sem banco de dados.
 
@@ -25,7 +25,8 @@ Outros comandos: `npm run build` gera a pasta `dist/`; `npm run preview` serve o
 
 | Quero mudar... | Arquivo |
 | --- | --- |
-| Dados do professor (formação, sala, e-mail, perfis) | `src/data/professor.ts` |
+| Dados do grupo, laboratório, redes e projetos | `src/data/grupo.ts` |
+| Dados do coordenador (formação, sala, e-mail, perfis) | `src/data/professor.ts` |
 | Publicações em destaque | `src/data/publicacoes.ts` |
 | Links de sistemas (Codefólio, datasets, ferramentas) | `src/data/sistemas.ts` |
 | Um bolsista | `src/content/bolsistas/<nome>.md` (copie `_modelo.md`) |
@@ -39,7 +40,7 @@ Valores escritos como `{{A_CONFIRMAR}}` aparecem no site com uma marca amarela "
 
 ## Brandkit
 
-As variáveis de `src/styles/tokens.css` seguem, com o mesmo nome, as variáveis do arquivo Figma "BrandKit · Site Silvio", páginas "E4 · Alto contraste claro" e "E4 · Alto contraste escuro": preto e branco, verde claro `#8CE99A` como preenchimento, roxo `#3A0CA3` e aqua `#4CC9F0` como detalhes, Gabarito nos títulos e Familjen Grotesk no corpo, botões em pílula e cartões com raio de 12 px. O modo escuro segue a preferência do sistema e pode ser trocado no botão do menu.
+As variáveis de `src/styles/tokens.css` seguem a estrutura do kit "E4 · Alto contraste" do Figma, adaptada à marca do grupo: preto, branco e o dourado do logo `#C09C48` (com `#6E5512` para links sobre fundo claro), Gabarito nos títulos e Familjen Grotesk no corpo, botões em pílula e cartões com raio de 12 px. O logo está em `public/logo-dc.png`. O modo escuro segue a preferência do sistema e pode ser trocado no botão do menu.
 
 ## Fontes dos dados
 

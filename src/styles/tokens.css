@@ -1,5 +1,5 @@
 /*
- * Tokens do brandkit "E4 · Alto contraste" (Figma: BrandKit · Site Silvio).
+ * Tokens do brandkit "E4 · Alto contraste" adaptado à marca Defesa Cibernética: preto, branco e o dourado do logo (#C09C48).
  * Cada variável aqui corresponde a uma variável da coleção do Figma, com o
  * mesmo nome (color/bg/page -> --color-bg-page). Modo claro é o padrão; o
  * modo escuro entra por preferência do sistema ou pelo atributo data-theme.
@@ -18,10 +18,10 @@
   --color-text-on-dark: #ffffff;
 
   /* Links e destaque */
-  --color-link: #3a0ca3;
+  --color-link: #6e5512;
   --color-link-hover: #111111;
-  --color-accent: #3a0ca3;         /* anel de foco no modo claro */
-  --color-accent-on-dark: #8ce99a; /* verde claro sobre fundos escuros */
+  --color-accent: #6e5512;         /* anel de foco no modo claro */
+  --color-accent-on-dark: #c09c48; /* dourado do logo sobre fundos escuros */
 
   /* Bordas */
   --color-border-card: #111111;
@@ -29,15 +29,15 @@
   --color-border-soft: #d9d9d3;
 
   /* Tag */
-  --color-tag-bg: #8ce99a;
+  --color-tag-bg: #c09c48;
   --color-tag-text: #111111;
 
   /* Botões */
   --color-button-primary-bg: #111111;
   --color-button-primary-text: #ffffff;
-  --color-button-primary-hover: #3a0ca3;
+  --color-button-primary-hover: #6e5512;
   --color-button-secondary-text: #111111;
-  --color-button-secondary-hover-bg: #e3f9e6;
+  --color-button-secondary-hover-bg: #f3e9cf;
   --color-button-disabled-bg: #e5e5e0;
   --color-button-disabled-text: #8a8a85;
   --color-button-muted: #a3a3a0;
@@ -49,13 +49,13 @@
   /* Navegação */
   --color-nav-bg: #ffffff;
   --color-nav-text: #111111;
-  --color-nav-active: #3a0ca3;
-  --color-nav-line: #8ce99a;
+  --color-nav-active: #6e5512;
+  --color-nav-line: #c09c48;
 
   /* Rodapé */
   --color-footer-bg: #111111;
   --color-footer-text: #ffffff;
-  --color-footer-link: #8ce99a;
+  --color-footer-link: #c09c48;
 
   /* Estados (coleção "Estados (comum)") */
   --color-success-text: #1b7a3a;
@@ -114,32 +114,32 @@
     --color-text-primary: #ffffff;
     --color-text-secondary: #c7c7c2;
     --color-text-on-dark: #ffffff;
-    --color-link: #8ce99a;
+    --color-link: #c09c48;
     --color-link-hover: #ffffff;
-    --color-accent: #4cc9f0;
-    --color-accent-on-dark: #8ce99a;
+    --color-accent: #d4b35e;
+    --color-accent-on-dark: #c09c48;
     --color-border-card: #333333;
     --color-border-input: #c7c7c2;
     --color-border-soft: #2a2a2a;
-    --color-tag-bg: #8ce99a;
+    --color-tag-bg: #c09c48;
     --color-tag-text: #111111;
-    --color-button-primary-bg: #8ce99a;
+    --color-button-primary-bg: #c09c48;
     --color-button-primary-text: #111111;
-    --color-button-primary-hover: #a8f0b4;
+    --color-button-primary-hover: #d4b35e;
     --color-button-secondary-text: #ffffff;
     --color-button-secondary-hover-bg: #1c1c1c;
     --color-button-disabled-bg: #262626;
     --color-button-disabled-text: #8a8a85;
     --color-button-muted: #6b6b66;
-    --color-quote-bg: #3a0ca3;
-    --color-quote-text: #ffffff;
+    --color-quote-bg: #2b2410;
+    --color-quote-text: #f3e9cf;
     --color-nav-bg: #000000;
     --color-nav-text: #ffffff;
-    --color-nav-active: #8ce99a;
-    --color-nav-line: #8ce99a;
+    --color-nav-active: #c09c48;
+    --color-nav-line: #c09c48;
     --color-footer-bg: #000000;
     --color-footer-text: #c7c7c2;
-    --color-footer-link: #8ce99a;
+    --color-footer-link: #c09c48;
     color-scheme: dark;
   }
 }
@@ -152,32 +152,32 @@
   --color-text-primary: #ffffff;
   --color-text-secondary: #c7c7c2;
   --color-text-on-dark: #ffffff;
-  --color-link: #8ce99a;
+  --color-link: #c09c48;
   --color-link-hover: #ffffff;
-  --color-accent: #4cc9f0;
-  --color-accent-on-dark: #8ce99a;
+  --color-accent: #d4b35e;
+  --color-accent-on-dark: #c09c48;
   --color-border-card: #333333;
   --color-border-input: #c7c7c2;
   --color-border-soft: #2a2a2a;
-  --color-tag-bg: #8ce99a;
+  --color-tag-bg: #c09c48;
   --color-tag-text: #111111;
-  --color-button-primary-bg: #8ce99a;
+  --color-button-primary-bg: #c09c48;
   --color-button-primary-text: #111111;
-  --color-button-primary-hover: #a8f0b4;
+  --color-button-primary-hover: #d4b35e;
   --color-button-secondary-text: #ffffff;
   --color-button-secondary-hover-bg: #1c1c1c;
   --color-button-disabled-bg: #262626;
   --color-button-disabled-text: #8a8a85;
   --color-button-muted: #6b6b66;
-  --color-quote-bg: #3a0ca3;
-  --color-quote-text: #ffffff;
+  --color-quote-bg: #2b2410;
+  --color-quote-text: #f3e9cf;
   --color-nav-bg: #000000;
   --color-nav-text: #ffffff;
-  --color-nav-active: #8ce99a;
-  --color-nav-line: #8ce99a;
+  --color-nav-active: #c09c48;
+  --color-nav-line: #c09c48;
   --color-footer-bg: #000000;
   --color-footer-text: #c7c7c2;
-  --color-footer-link: #8ce99a;
+  --color-footer-link: #c09c48;
   color-scheme: dark;
 }
 

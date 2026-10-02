@@ -17,13 +17,12 @@ export const defaultLang: Lang = 'pt-BR';
 
 export const ui = {
   'pt-BR': {
-    'site.name': 'Silvio Quincozes',
-    'site.tagline': 'Detecção de intrusão explicável em sistemas ciberfísicos',
+    'site.name': 'Defesa Cibernética',
+    'site.tagline': 'Grupo de pesquisa em cibersegurança e inteligência artificial aplicada',
     'nav.home': 'Início',
-    'nav.about': 'Sobre',
-    'nav.research': 'Pesquisa',
-    'nav.teaching': 'Ensino',
-    'nav.students': 'Bolsistas',
+    'nav.profile': 'Perfil',
+    'nav.projects': 'Projetos',
+    'nav.students': 'Orientandos',
     'nav.systems': 'Sistemas',
     'nav.publications': 'Publicações',
     'nav.contact': 'Contato',
@@ -33,17 +32,19 @@ export const ui = {
     'theme.toggle': 'Alternar tema claro/escuro',
     'theme.light': 'Tema claro',
     'theme.dark': 'Tema escuro',
-    'footer.institution': 'Universidade Federal do Pampa (Unipampa) · Campus Alegrete',
+    'footer.institution': 'Unipampa · FACOM/UFU · UFSM',
+    'footer.lab': 'Subgrupo do AI Horizon Labs',
     'footer.profiles': 'Perfis',
     'footer.sections': 'Seções',
     'footer.source': 'Fonte dos dados',
     'footer.updated': 'Dados conferidos em',
-    'footer.rights': 'Conteúdo mantido pelo grupo de pesquisa.',
-    'cta.research': 'Conhecer a pesquisa',
-    'cta.students': 'Área dos bolsistas',
+    'footer.rights': 'Conteúdo mantido pelo grupo Defesa Cibernética.',
+    'cta.research': 'Ver os projetos',
+    'cta.students': 'Área dos orientandos',
     'cta.contact': 'Entrar em contato',
     'cta.scholar': 'Ver publicações no Google Scholar',
     'cta.startTrail': 'Começar a trilha',
+    'cta.profile': 'Perfil do coordenador',
     'cta.openSystems': 'Abrir sistemas',
     'cta.about': 'Sobre o professor',
     'label.new': 'Novo',
@@ -55,8 +56,8 @@ export const ui = {
   },
   en: {
     // TODO: traduzir quando a versão em inglês for ativada.
-    'site.name': 'Silvio Quincozes',
-    'site.tagline': 'Explainable intrusion detection for cyber-physical systems',
+    'site.name': 'Defesa Cibernética',
+    'site.tagline': 'Research group on cybersecurity and applied artificial intelligence',
   },
 } as const;
 

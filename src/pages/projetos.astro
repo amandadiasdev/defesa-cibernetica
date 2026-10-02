@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import Tag from '../components/Tag.astro';
+import Button from '../components/Button.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { professor, sources } from '../data/professor';
+import { grupo, projetos } from '../data/grupo';
+import { publicacoesDestaque } from '../data/publicacoes';
+import { url } from '../lib/url';
+
+const destaques = publicacoesDestaque.slice(0, 3);
+const isPlaceholder = (v: string) => /^\{\{.*\}\}$/.test(v);
+---
+
+<Base title="Projetos" description={`Projetos e temas de pesquisa do grupo ${grupo.nome}: agentes de IA para subestações (SAFEGRID), detecção de intrusão explicável (XAIID), extensão e trabalhos publicados.`}>
+  <section class="section">
+    <div class="container">
+      <SectionHeading level="h1" eyebrow={`${grupo.nome} · projetos e pesquisa`} title="O que o grupo pesquisa" lead={professor.pesquisa.resumo} />
+      <div class="cluster">
+        {['Detecção de intrusão', 'Agentes de IA', 'Sistemas ciberfísicos', 'IEC 61850', 'XAI', 'LLMs', 'Educação 5.0', 'Engenharia de software'].map((c) => <Tag>{c}</Tag>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="projetos">
+    <div class="container">
+      <SectionHeading id="projetos" title="Projetos" lead="Projetos em andamento no grupo. Dados marcados como a confirmar ainda serão completados pelo professor." />
+      <div class="grid grid--2">
+        {projetos.map((p) => (
+          <Card title={p.sigla === 'Outros' ? p.titulo : `${p.sigla} · ${p.titulo}`} tag={p.status === 'a confirmar' ? 'a confirmar' : p.agencia ?? p.status}>
+            <p>{p.resumo}</p>
+            {p.codigo && (
+              <p class="caption">
+                {isPlaceholder(p.codigo) ? <>Edital e número: <Placeholder value={p.codigo} /></> : <>Código: {p.codigo}</>}
+                {p.periodo && <> · Período: {isPlaceholder(p.periodo) ? <Placeholder value={p.periodo} /> : p.periodo}</>}
+              </p>
+            )}
+            {p.temas.length > 0 && <p class="cluster">{p.temas.map((t) => <Tag>{t}</Tag>)}</p>}
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="temas">
+    <div class="container">
+      <SectionHeading id="temas" title="Temas de pesquisa" lead="Seis frentes que se combinam: dados, otimização e explicabilidade de modelos, aplicados a segurança, educação e software." />
+      <div class="grid grid--3">
+        {professor.pesquisa.temas.map((t, i) => (
+          <Card title={t.nome} tag={`Tema ${i + 1}`}>
+            <p>{t.descricao}</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="extensao">
+    <div class="container two-col">
+      <div>
+        <SectionHeading id="extensao" title="Extensão" lead={professor.extensao.resumo} />
+        <div class="grid grid--2">
+          {professor.extensao.iniciativas.map((i) => (
+            <Card title={i.nome} href={isPlaceholder(i.url) ? undefined : i.url} linkLabel={isPlaceholder(i.url) ? undefined : 'Abrir'}>
+              <p>{isPlaceholder(i.descricao) ? <Placeholder value={i.descricao} label="descrição a confirmar" /> : i.descricao}</p>
+            </Card>
+          ))}
+          <Card title="Bolsistas de extensão">
+            <p>Quem participa das ações de extensão tem trilha e lista próprias na área dos orientandos.</p>
+            <p><a href={url('/bolsistas/extensao/')}>Ver a área de extensão →</a></p>
+          </Card>
+        </div>
+      </div>
+      <div>
+        <SectionHeading id="laboratorio" title="Onde o grupo se encaixa" />
+        <p class="prose">{grupo.laboratorio.descricao} {isPlaceholder(grupo.laboratorio.url) ? <>Página do laboratório: <Placeholder value={grupo.laboratorio.url} label="link a confirmar" />.</> : <a href={grupo.laboratorio.url} rel="noopener">Página do {grupo.laboratorio.nome} →</a>}</p>
+        <h3 style="margin-top: var(--space-5)">Instituições</h3>
+        <ul class="partners">
+          {grupo.instituicoes.map((p) => <li>{p}</li>)}
+          {professor.parcerias.valor.filter((p) => !grupo.instituicoes.some((i) => i.includes(p))).map((p) => <li>{p}</li>)}
+        </ul>
+        <h3 style="margin-top: var(--space-5)">Presença</h3>
+        <ul class="partners">
+          {grupo.eventos.map((e) => <li>{e}</li>)}
+          {grupo.redes.map((r) => <li><a href={r.url} rel="noopener">{r.nome} {r.handle}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="destaques">
+    <div class="container">
+      <SectionHeading id="destaques" title="Trabalhos em destaque" lead="Três dos trabalhos mais citados do coordenador." />
+      <div class="grid grid--3">
+        {destaques.map((p) => (
+          <Card title={p.titulo} tag={String(p.ano)}>
+            <p>{p.destaque}</p>
+            <p class="caption">{p.citacoes} citações · {p.tema.join(' · ')}</p>
+          </Card>
+        ))}
+      </div>
+      <div class="cluster" style="margin-top: var(--space-5)">
+        <Button href="/publicacoes/" variant="primary">Todas as publicações em destaque</Button>
+        <Button href={sources.scholar.url} variant="link">Perfil no Google Scholar</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--band" aria-labelledby="participar">
+    <div class="container">
+      <SectionHeading id="participar" title="Quer participar?" lead="Iniciação científica, extensão, TCC, mestrado e doutorado. A área dos orientandos explica as trilhas e o que se espera de quem entra." />
+      <Button href="/bolsistas/" variant="primary">Área dos orientandos</Button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .two-col {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-6);
+  }
+  .partners {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-2);
+    display: grid;
+    gap: var(--space-1);
+  }
+  .partners li {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-default);
+  }
+  @media (max-width: 767px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

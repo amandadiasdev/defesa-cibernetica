@@ -8,12 +8,11 @@ const current = Astro.url.pathname;
 
 const items = [
   { href: '/', label: t('nav.home') },
-  { href: '/sobre/', label: t('nav.about') },
-  { href: '/pesquisa/', label: t('nav.research') },
-  { href: '/ensino/', label: t('nav.teaching') },
+  { href: '/projetos/', label: t('nav.projects') },
   { href: '/bolsistas/', label: t('nav.students') },
-  { href: '/sistemas/', label: t('nav.systems') },
   { href: '/publicacoes/', label: t('nav.publications') },
+  { href: '/sistemas/', label: t('nav.systems') },
+  { href: '/perfil/', label: t('nav.profile') },
   { href: '/contato/', label: t('nav.contact') },
 ];
 ---
@@ -21,7 +20,7 @@ const items = [
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href={url('/')} aria-label={t('site.name')}>
-      <span class="brand__mark" aria-hidden="true"></span>
+      <img class="brand__logo" src={url('/logo-dc.png')} width="36" height="36" alt="" aria-hidden="true" />
       <span class="brand__name">{t('site.name')}</span>
     </a>
 
@@ -110,12 +109,11 @@ const items = [
     font-weight: var(--weight-heading);
     font-size: 18px;
   }
-  .brand__mark {
-    width: 14px;
-    height: 14px;
+  .brand__logo {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: var(--color-accent-on-dark);
-    box-shadow: 0 0 0 3px var(--color-nav-bg), 0 0 0 5px var(--color-accent-on-dark);
+    background: #ffffff;
   }
   .nav__list {
     list-style: none;

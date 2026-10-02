@@ -16,6 +16,11 @@ export default defineConfig({
   site: SITE,
   base: BASE,
   trailingSlash: 'ignore',
+  redirects: {
+    '/sobre': '/perfil',
+    '/pesquisa': '/projetos',
+    '/ensino': '/perfil',
+  },
   build: { format: 'directory' },
   i18n: {
     defaultLocale: 'pt-BR',

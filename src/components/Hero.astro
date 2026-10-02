@@ -2,7 +2,7 @@
 import { url } from '../lib/url';
 import Button from './Button.astro';
 import { useTranslations } from '../i18n/ui';
-import { professor } from '../data/professor';
+import { grupo } from '../data/grupo';
 
 const t = useTranslations('pt-BR');
 ---
@@ -10,31 +10,20 @@ const t = useTranslations('pt-BR');
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__inner">
     <div class="hero__text">
-      <ul class="hero__badges" aria-label="Titulação">
-        <li class="hero__kicker">Doutor em Ciência da Computação · UFF</li>
-        <li class="hero__kicker">Mestre em Ciência da Computação · UFSM</li>
-        <li class="hero__kicker">Professor · Unipampa</li>
+      <ul class="hero__badges" aria-label="Instituições">
+        <li class="hero__kicker">Desde {grupo.desde}</li>
+        {grupo.instituicoes.map((i) => <li class="hero__kicker">{i}</li>)}
       </ul>
-      <h1 id="hero-title">{professor.nome}</h1>
-      <p class="hero__tagline">{t('site.tagline')}</p>
-      <p class="hero__lead">
-        {professor.coordenacao.curto} e docente do PPGCO (UFU). Pesquisa cibersegurança e inteligência artificial
-        aplicada: detecção de intrusões em sistemas ciberfísicos, explicabilidade de modelos e LLMs.
-      </p>
+      <h1 id="hero-title">{grupo.nome}</h1>
+      <p class="hero__tagline">{grupo.tagline}</p>
+      <p class="hero__lead">{grupo.descricaoCurta}</p>
       <div class="hero__actions">
-        <Button href="/pesquisa/" variant="primary" onDark>{t('cta.research')}</Button>
+        <Button href="/projetos/" variant="primary" onDark>{t('cta.research')}</Button>
         <Button href="/bolsistas/" variant="secondary" onDark>{t('cta.students')}</Button>
       </div>
     </div>
-    <div class="hero__photo">
-      <img
-        src={url('/foto-silvio.jpeg')}
-        width="320"
-        height="320"
-        alt={`Foto oficial de ${professor.nome}`}
-        loading="eager"
-        decoding="async"
-      />
+    <div class="hero__logo">
+      <img src={url('/logo-dc.png')} width="300" height="300" alt={`Logo do grupo ${grupo.nome}`} loading="eager" decoding="async" />
     </div>
   </div>
 </section>
@@ -90,13 +79,15 @@ const t = useTranslations('pt-BR');
     flex-wrap: wrap;
     gap: var(--space-3);
   }
-  .hero__photo img {
-    width: 320px;
-    height: 320px;
+  .hero__logo img {
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    object-fit: cover;
+    background: #ffffff;
+    object-fit: contain;
+    padding: 16px;
     border: 4px solid var(--color-accent-on-dark);
-    box-shadow: 0 0 0 12px rgba(140, 233, 154, 0.12);
+    box-shadow: 0 0 0 12px rgba(192, 156, 72, 0.12);
   }
 
   @media (max-width: 899px) {
@@ -108,13 +99,14 @@ const t = useTranslations('pt-BR');
       text-align: center;
       gap: var(--space-4);
     }
-    .hero__photo {
+    .hero__logo {
       order: -1;
       justify-self: center;
     }
-    .hero__photo img {
+    .hero__logo img {
       width: 160px;
       height: 160px;
+      padding: 10px;
     }
     .hero__tagline,
     .hero__lead {

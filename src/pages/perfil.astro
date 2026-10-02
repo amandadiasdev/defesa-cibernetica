@@ -4,15 +4,16 @@ import SectionHeading from '../components/SectionHeading.astro';
 import Placeholder from '../components/Placeholder.astro';
 import Tag from '../components/Tag.astro';
 import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
 import { professor, sources } from '../data/professor';
 import { url } from '../lib/url';
 ---
 
-<Base title="Sobre" description="Formação, atuação e áreas de pesquisa do professor Silvio Ereno Quincozes, da Universidade Federal do Pampa, campus Alegrete.">
+<Base title="Perfil" description="Perfil do coordenador do grupo Defesa Cibernética: formação, atuação, disciplinas e áreas de pesquisa do professor Silvio Ereno Quincozes (Unipampa, campus Alegrete).">
   <section class="section">
     <div class="container about">
       <div class="about__text">
-        <SectionHeading level="h1" eyebrow="Sobre" title={professor.nome} lead={professor.cargo + '.'} />
+        <SectionHeading level="h1" eyebrow="Perfil · coordenador do grupo" title={professor.nome} lead={professor.cargo + '.'} />
         <p class="prose">
           {professor.coordenacao.valor} e docente do {professor.posGraduacao[1].nome} ({professor.posGraduacao[1].sigla}, {professor.posGraduacao[1].instituicao}).
           Lotado no {professor.campus.valor} da Unipampa, {professor.classe.valor.toLowerCase()}.
@@ -50,10 +51,9 @@ import { url } from '../lib/url';
       <div>
         <SectionHeading id="atuacao" title="Atuação" />
         <ul class="list">
-          <li><strong>Graduação:</strong> disciplinas de {professor.disciplinas.map((d) => d.nome).join(', ')} (detalhes na página <a href={url('/ensino/')}>Ensino</a>).</li>
           <li><strong>Coordenação:</strong> {professor.coordenacao.valor}.</li>
           <li><strong>Pós-graduação:</strong> orientação de mestrado e doutorado no PPGES (Unipampa) e no PPGCO (UFU).</li>
-          <li><strong>Pesquisa:</strong> cibersegurança e inteligência artificial aplicada, descrita na página <a href={url('/pesquisa/')}>Pesquisa</a>.</li>
+          <li><strong>Pesquisa:</strong> cibersegurança e inteligência artificial aplicada, descrita na página <a href={url('/projetos/')}>Projetos</a>.</li>
           <li><strong>Parcerias:</strong> {professor.parcerias.valor.join(', ')}.</li>
         </ul>
       </div>
@@ -75,6 +75,23 @@ import { url } from '../lib/url';
             <Button href={p.url} variant="secondary">{p.nome}</Button>
           ))}
         </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--band" aria-labelledby="ensino">
+    <div class="container">
+      <SectionHeading id="ensino" title="Ensino" lead="Disciplinas na graduação da Unipampa (campus Alegrete) e orientação na pós-graduação." />
+      <div class="grid grid--3">
+        {professor.disciplinas.map((d) => (
+          <Card title={d.nome} tag={d.nivel}>
+            <p>Semestre e material: a confirmar.</p>
+          </Card>
+        ))}
+        {professor.posGraduacao.map((p) => (
+          <Card title={`${p.sigla} · ${p.instituicao}`} tag="Mestrado e doutorado">
+            <p>{p.nome}.</p>
+          </Card>
+        ))}
       </div>
     </div>
   </section>

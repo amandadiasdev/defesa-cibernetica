@@ -21,7 +21,7 @@ const resumo = areas.map((a) => ({
 <Base title="Bolsistas" description="Área dos bolsistas: pesquisa, extensão e outros programas, cada um com a própria trilha de estudo, lista de bolsistas, glossário e como entrar no grupo.">
   <section class="section">
     <div class="container">
-      <SectionHeading level="h1" eyebrow="Área dos bolsistas" title="Três áreas, três trilhas" lead="Escolha a sua área. Cada uma tem uma trilha de estudo em degraus e a lista de quem já está lá. Quem chega agora começa pelo degrau 1; quem já está no grupo vai direto aos cartões dos colegas." />
+      <SectionHeading level="h1" eyebrow="Área dos orientandos" title="Três áreas, três trilhas" lead="Escolha a sua área. Cada uma tem uma trilha de estudo em degraus e a lista de quem já está lá. Quem chega agora começa pelo degrau 1; quem já está no grupo vai direto aos cartões dos colegas." />
       <div class="grid grid--3">
         {resumo.map(({ area, degraus, atuais }) => (
           <Card title={area.nome} href={`/bolsistas/${area.id}/`} tag={area.emConstrucao ? 'trilha em construção' : `${degraus} degraus`} linkLabel="Entrar">

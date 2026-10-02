@@ -2,15 +2,15 @@
 import { url } from '../lib/url';
 import { useTranslations } from '../i18n/ui';
 import { professor } from '../data/professor';
+import { grupo } from '../data/grupo';
 
 const t = useTranslations('pt-BR');
 const sections = [
-  { href: '/sobre/', label: t('nav.about') },
-  { href: '/pesquisa/', label: t('nav.research') },
-  { href: '/ensino/', label: t('nav.teaching') },
+  { href: '/projetos/', label: t('nav.projects') },
   { href: '/bolsistas/', label: t('nav.students') },
-  { href: '/sistemas/', label: t('nav.systems') },
   { href: '/publicacoes/', label: t('nav.publications') },
+  { href: '/sistemas/', label: t('nav.systems') },
+  { href: '/perfil/', label: t('nav.profile') },
   { href: '/contato/', label: t('nav.contact') },
 ];
 ---
@@ -18,9 +18,11 @@ const sections = [
 <footer class="site-footer">
   <div class="container site-footer__grid">
     <div class="site-footer__about">
-      <p class="site-footer__name">{professor.nome}</p>
-      <p>{t('footer.institution')}</p>
-      <p>{professor.sala.valor} · <a href={`mailto:${professor.email.valor}`}>{professor.email.valor}</a></p>
+      <p class="site-footer__name">{grupo.nome} <span class="site-footer__since">desde {grupo.desde}</span></p>
+      <p>{grupo.tagline}.</p>
+      <p>{t('footer.lab')} · {t('footer.institution')}</p>
+      <p>Coordenação: <a href={url('/perfil/')}>{professor.nome}</a> · <a href={`mailto:${professor.email.valor}`}>{professor.email.valor}</a></p>
+      <p>{grupo.redes.map((r) => <a href={r.url} rel="noopener">{r.nome} {r.handle}</a>)}</p>
     </div>
 
     <div>
@@ -72,6 +74,13 @@ const sections = [
     font-size: var(--text-h3);
     margin-bottom: var(--space-2);
     color: var(--color-text-on-dark);
+  }
+  .site-footer__since {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-caption);
+    color: var(--color-footer-link);
+    margin-left: var(--space-2);
   }
   .site-footer__heading {
     font-family: var(--font-heading);
